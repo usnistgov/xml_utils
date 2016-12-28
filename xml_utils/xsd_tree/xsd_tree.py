@@ -1,6 +1,7 @@
 """ XSD tree operation, build, parse
 """
 import lxml.etree as etree
+import xml_utils.commons.exceptions as exceptions
 from io import BytesIO
 
 
@@ -22,4 +23,21 @@ class XSDTree(object):
             xml_tree = etree.parse(BytesIO(xml_string.encode('utf-8')))
         except Exception:
             xml_tree = etree.parse(BytesIO(xml_string))
+        return xml_tree
+
+    @staticmethod
+    def tostring(xml_tree, pretty=False):
+        """ Return an XML String from a lxml etree
+
+        Args:
+            xml_tree:
+            pretty:
+
+        Returns:
+
+        """
+        try:
+            xml_tree = etree.tostring(xml_tree, pretty_print=pretty)
+        except Exception as e:
+            raise exceptions.XMLError(e.message)
         return xml_tree
