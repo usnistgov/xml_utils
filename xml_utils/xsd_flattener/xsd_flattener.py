@@ -1,9 +1,9 @@
 """ XSD Flattener abstract class
 """
-from xsd_tree.xsd_tree import XSDTree
+from xml_utils.xsd_tree.xsd_tree import XSDTree
 import lxml.etree as etree
 from abc import ABCMeta, abstractmethod
-import commons.constants as constants
+import xml_utils.commons.constants as constants
 
 
 class XSDFlattener(object):
