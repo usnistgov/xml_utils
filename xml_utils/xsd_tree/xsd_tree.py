@@ -37,7 +37,21 @@ class XSDTree(object):
 
         """
         try:
-            xml_tree = etree.tostring(xml_tree, pretty_print=pretty)
+            return etree.tostring(xml_tree, pretty_print=pretty)
         except Exception as e:
             raise exceptions.XMLError(e.message)
-        return xml_tree
+
+    @staticmethod
+    def fromstring(xml_string):
+        """ Convert a string to an XML tree
+
+        Args:
+            xml_string:
+
+        Returns:
+
+        """
+        try:
+            return etree.fromstring(xml_string)
+        except Exception as e:
+            raise exceptions.XMLError(e.message)
