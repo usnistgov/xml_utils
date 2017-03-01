@@ -55,3 +55,21 @@ class XSDTree(object):
             return etree.fromstring(xml_string)
         except Exception as e:
             raise exceptions.XMLError(e.message)
+
+    @staticmethod
+    def iterfind(xml_string, match):
+        """ Finds all matching sub elements, by tag name or path.
+        Args:
+            xml_string: String xml.
+            match: Pattern to match
+
+        Returns:
+            An iterable yielding all matching elements in document order.
+
+        """
+        try:
+            xml_tree = XSDTree.build_tree(xml_string)
+            return xml_tree.iterfind(match)
+        except Exception as e:
+            raise exceptions.XMLError(e.message)
+
