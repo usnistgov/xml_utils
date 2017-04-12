@@ -73,3 +73,19 @@ class XSDTree(object):
         except Exception as e:
             raise exceptions.XMLError(e.message)
 
+    @staticmethod
+    def iterparse(xml_string, events):
+        """ Returns etree.iterparse
+
+        Args:
+            xml_string:
+            events:
+
+        Returns:
+
+        """
+        try:
+            xml_file = BytesIO(str(xml_string))
+            return etree.iterparse(xml_file, events)
+        except Exception as e:
+            raise exceptions.XMLError(e.message)
