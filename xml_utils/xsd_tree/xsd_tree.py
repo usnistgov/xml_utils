@@ -42,6 +42,36 @@ class XSDTree(object):
             raise exceptions.XMLError(e.message)
 
     @staticmethod
+    def transform_to_xslt(xml_parsed):
+        """ Turn an XML document into an XSLT object.
+
+        Args:
+            xml_parsed:
+
+        Returns:
+
+        """
+        try:
+            return etree.XSLT(xml_parsed)
+        except:
+            return etree.XSLT(xml_parsed.encode('utf-8'))
+
+    @staticmethod
+    def transform_to_xml(xml_string):
+        """ Turn an XML document into an XML object.
+
+        Args:
+            xml_string:
+
+        Returns:
+
+        """
+        try:
+            return etree.XML(xml_string)
+        except:
+            return etree.XML(xml_string.encode('utf-8'))
+
+    @staticmethod
     def fromstring(xml_string):
         """ Convert a string to an XML tree
 
