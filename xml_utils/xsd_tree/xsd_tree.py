@@ -1,6 +1,7 @@
 """ XSD tree operation, build, parse
 """
 import lxml.etree as etree
+import xml_utils.commons.constants as xml_constants
 import xml_utils.commons.exceptions as exceptions
 from io import BytesIO
 
@@ -117,5 +118,21 @@ class XSDTree(object):
         try:
             xml_file = BytesIO(str(xml_string))
             return etree.iterparse(xml_file, events)
+        except Exception as e:
+            raise exceptions.XMLError(e.message)
+
+    @staticmethod
+    def get_extension(xml_tree):
+        """ Returns the extension file from a parsed xml
+
+        Args:
+            xml_tree: result of build_tree
+
+        Returns:
+
+        """
+        try:
+            return xml_tree.find("//xsl:output",
+                                 namespaces={'xsl': xml_constants.XSL_NAMESPACE}).attrib['method']
         except Exception as e:
             raise exceptions.XMLError(e.message)
