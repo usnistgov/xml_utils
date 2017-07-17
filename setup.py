@@ -9,7 +9,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name="xml_utils",
-    version="1.0.0-alpha2",
+    version="1.0.0-alpha3",
     description=("XML Utils package",),
     author="NIST IT Lab",
     author_email="itl_inquiries@nist.gov",
