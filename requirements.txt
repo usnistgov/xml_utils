@@ -1,4 +1,5 @@
-lxml==3.6.4
-xmltodict==0.10.2
-pyzmq==15.4.0
+lxml==4.1.1
+xmltodict==0.11.0
+pyzmq==16.0.3
 mock==2.0.0
+# xerces_wrapper==0.1.0

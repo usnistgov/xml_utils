@@ -2,7 +2,7 @@
 """
 
 import urllib2
-from xsd_flattener import XSDFlattener
+from xml_utils.xsd_flattener.xsd_flattener import XSDFlattener
 
 
 class XSDFlattenerURL(XSDFlattener):
