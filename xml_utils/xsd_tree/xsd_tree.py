@@ -1,9 +1,12 @@
 """ XSD tree operation, build, parse
 """
+from io import BytesIO
+
 import lxml.etree as etree
+from lxml.etree import Element
+
 import xml_utils.commons.constants as xml_constants
 import xml_utils.commons.exceptions as exceptions
-from io import BytesIO
 
 
 class XSDTree(object):
@@ -136,3 +139,18 @@ class XSDTree(object):
                                  namespaces={'xsl': xml_constants.XSL_NAMESPACE}).attrib['method']
         except Exception as e:
             raise exceptions.XMLError(e.message)
+
+    @staticmethod
+    def create_element(tag, attrib=None, nsmap=None, **extra):
+        """
+        This function creates an Element.
+
+        Args:
+            tag:
+            attrib:
+            nsmap:
+            extra:
+
+        Returns:
+        """
+        return Element(tag, attrib, nsmap, **extra)
