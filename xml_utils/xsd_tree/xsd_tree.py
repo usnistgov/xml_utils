@@ -3,7 +3,7 @@
 from io import BytesIO
 
 import lxml.etree as etree
-from lxml.etree import Element
+from lxml.etree import Element, SubElement
 
 import xml_utils.commons.constants as xml_constants
 import xml_utils.commons.exceptions as exceptions
@@ -154,3 +154,19 @@ class XSDTree(object):
         Returns:
         """
         return Element(tag, attrib, nsmap, **extra)
+
+    @staticmethod
+    def create_sub_element(parent, tag, attrib=None, nsmap=None, **extra):
+        """
+        This function creates a SubElement.
+
+        Args:
+            parent:
+            tag:
+            attrib:
+            nsmap:
+            extra:
+
+        Returns:
+        """
+        return SubElement(parent, tag, attrib, nsmap, **extra)
