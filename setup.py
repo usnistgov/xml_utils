@@ -22,7 +22,7 @@ chdir(normpath(join(abspath(__file__), pardir)))
 
 setup(
     name="xml_utils",
-    version="1.0.0-alpha6",
+    version="1.0.0-beta1",
     description="XML utils for the curator core project",
     long_description=long_desc,
     author="NIST IT Lab",
