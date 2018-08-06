@@ -119,7 +119,7 @@ class XSDTree(object):
 
         """
         try:
-            xml_file = BytesIO(str(xml_string))
+            xml_file = BytesIO(xml_string.encode('utf-8'))
             return etree.iterparse(xml_file, events)
         except Exception as e:
             raise exceptions.XMLError(e.message)
