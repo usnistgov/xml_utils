@@ -46,6 +46,27 @@ def get_default_prefix(namespaces):
     return default_prefix
 
 
+def get_global_namespace(xsd_string):
+    """ Get global namespace used in schema (defined by xmlns=<namespace>)
+
+    Returns:
+
+    """
+    # events to look for during iterparse
+    events = "start", "start-ns"
+    # Initialize global namespace
+    global_namespace = None
+    # iterate file namespaces
+    for event, elem in XSDTree.iterparse(xsd_string, events):
+        if event == "start-ns":
+            if len(elem[0]) == 0:
+                global_namespace = elem[1]
+        elif event == "start":
+            break
+
+    return global_namespace
+
+
 def get_target_namespace(xsd_tree, namespaces):
     """Returns the target namespace used in the schema
 

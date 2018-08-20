@@ -1,8 +1,11 @@
 """Unit tests for namespaces operations
 """
 from unittest import TestCase
+
 from lxml import etree
-from xml_utils.xsd_tree.operations.namespaces import get_namespaces, get_default_prefix, get_target_namespace
+
+from xml_utils.xsd_tree.operations.namespaces import get_namespaces, get_default_prefix, get_target_namespace, \
+    get_global_namespace
 from xml_utils.xsd_tree.xsd_tree import XSDTree
 
 
@@ -31,6 +34,23 @@ class TestGetNamespaces(TestCase):
         xsd_string = "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'></xs:schema>"
         namespaces = get_namespaces(xsd_string)
         self.assertTrue('xml' in namespaces.keys())
+
+
+class TestGetGlobalNamespace(TestCase):
+    def test_get_global_namespace_returns_namespace(self):
+        xsd_string = "<xs:schema xmlns='http://www.w3.org/2001/XMLSchema'></xs:schema>"
+        global_namespace = get_global_namespace(xsd_string)
+        self.assertEquals(global_namespace, 'http://www.w3.org/2001/XMLSchema')
+
+    def test_get_global_namespace_returns_namespace_when_multiple_attributes(self):
+        xsd_string = "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns='test'></xs:schema>"
+        global_namespace = get_global_namespace(xsd_string)
+        self.assertTrue(global_namespace, 'test')
+
+    def test_get_global_namespace_returns_none_when_no_xmlns(self):
+        xsd_string = "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'></xs:schema>"
+        global_namespace = get_global_namespace(xsd_string)
+        self.assertEquals(global_namespace, None)
 
 
 class TestGetDefautPrefix(TestCase):
