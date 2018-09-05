@@ -10,19 +10,23 @@ class XSDFlattenerURL(XSDFlattener):
     """
 
     def __init__(self, xml_string, download_enabled=True):
-        """Initializes the flattener
+        """ Initialize the flattener
 
-        :param xml_string:
-        :param download_enabled:
+        Args:
+            xml_string:
+            download_enabled:
         """
         XSDFlattener.__init__(self, xml_string=xml_string)
         self.download_enabled = download_enabled
 
     def get_dependency_content(self, uri):
-        """Downloads the content found at the URL
+        """ Download the content found at the URL
 
-        :param uri:
-        :return:
+        Args:
+            uri:
+
+        Returns:
+
         """
         content = ""
 

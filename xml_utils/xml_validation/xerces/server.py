@@ -6,9 +6,10 @@ import argparse
 
 
 def _xerces_exists():
-    """
-    Check if xerces wrapper is installed
-    :return:
+    """ Check if xerces wrapper is installed
+
+    Returns:
+
     """
     try:
         __import__('xerces_wrapper')
@@ -21,10 +22,14 @@ def _xerces_exists():
 
 
 def _xerces_validate_xsd(xsd_string):
-    """
-    Validate schema using Xerces
-    :param xsd_string
-    :return: errors
+    """ Validate schema using Xerces
+
+    Args:
+        xsd_string:
+
+    Returns:
+        errors
+
     """
     if _xerces_exists():
         import xerces_wrapper
@@ -41,11 +46,15 @@ def _xerces_validate_xsd(xsd_string):
 
 
 def _xerces_validate_xml(xsd_string, xml_string):
-    """
-    Validate document using Xerces
-    :param xsd_string
-    :param xml_string
-    :return: errors
+    """ Validate document using Xerces
+
+    Args:
+        xsd_string:
+        xml_string:
+
+    Returns:
+        errors
+
     """
     if _xerces_exists():
         import xerces_wrapper

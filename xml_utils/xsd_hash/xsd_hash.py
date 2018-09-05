@@ -6,11 +6,15 @@ import copy
 
 
 def get_hash(xml_string):
+    """ Get the hash of an XML String
+
+    Args:
+        xml_string: XML String to hash
+
+    Returns:
+
     """
-    Get the hash of an XML String
-    :param xml_string: XML String to hash
-    :return:
-    """
+
     hash_parser = etree.XMLParser(remove_blank_text=True, remove_comments=True, remove_pis=True)
     etree.set_default_parser(parser=hash_parser)
 
@@ -36,10 +40,13 @@ def get_hash(xml_string):
 
 
 def sort_dict(o):
-    """
-    Return a sorted dictionary
-    :param o:
-    :return:
+    """ Return a sorted dictionary
+
+    Args:
+        o:
+
+    Returns:
+
     """
     if isinstance(o, (set, tuple, list)):
         return tuple([sort_dict(e) for e in sorted(o)])

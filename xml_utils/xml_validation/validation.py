@@ -8,10 +8,14 @@ import json
 
 
 def xerces_validate_xsd(xsd_tree):
-    """
-        Send XML Schema to server to be validated
-        :param xsd_tree:
-        :return: None if no errors, string otherwise
+    """  Send XML Schema to server to be validated
+
+    Args:
+        xsd_tree:
+
+    Returns:
+        None if no errors, string otherwise
+
     """
     xsd_string = _xsd_serialize(xsd_tree)
     message = {'xsd_string': xsd_string}
@@ -20,11 +24,15 @@ def xerces_validate_xsd(xsd_tree):
 
 
 def xerces_validate_xml(xsd_tree, xml_tree):
-    """
-        Send XML Data and XML Schema to server to validate data against the schema
-        :param xsd_tree:
-        :param xml_tree:
-        :return: None if no errors, string otherwise
+    """ Send XML Data and XML Schema to server to validate data against the schema
+
+    Args:
+        xsd_tree:
+        xml_tree:
+
+    Returns:
+        None if no errors, string otherwise
+
     """
     pretty_xml_string = _xsd_serialize(xml_tree, pretty_print=True)
     xsd_string = _xsd_serialize(xsd_tree)
@@ -34,10 +42,14 @@ def xerces_validate_xml(xsd_tree, xml_tree):
 
 
 def lxml_validate_xsd(xsd_tree):
-    """
-        Validate schema using LXML
-        :param xsd_tree
-        :return: errors
+    """ Validate schema using LXML
+
+    Args:
+        xsd_tree:
+
+    Returns:
+        errors
+
     """
     error = None
     try:
@@ -48,11 +60,15 @@ def lxml_validate_xsd(xsd_tree):
 
 
 def lxml_validate_xml(xsd_tree, xml_tree):
-    """
-        Validate document using LXML
-        :param xsd_tree
-        :param xml_tree
-        :return: errors
+    """ Validate document using LXML
+
+    Args:
+        xsd_tree:
+        xml_tree:
+
+    Returns:
+        errors
+
     """
     error = None
     try:
@@ -64,11 +80,15 @@ def lxml_validate_xml(xsd_tree, xml_tree):
 
 
 def _xsd_serialize(xsd_tree, pretty_print=False):
-    """
-        Serialize xsd document
-        :param xsd_tree
-        :param pretty_print
-        :return: xsd string
+    """ Serialize xsd document
+
+    Args:
+        xsd_tree:
+        pretty_print:
+
+    Returns:
+        xsd string
+
     """
     try:
         xsd_string = etree.tostring(xsd_tree, pretty_print)
@@ -78,10 +98,14 @@ def _xsd_serialize(xsd_tree, pretty_print=False):
 
 
 def _json_serialize(message):
-    """
-        Serialize json document
-        :param message
-        :return: json string
+    """ Serialize json document
+
+    Args:
+        message:
+
+    Returns:
+        json string
+
     """
     try:
         message = json.dumps(message)

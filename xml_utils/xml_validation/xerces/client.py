@@ -2,14 +2,17 @@ import zmq
 
 
 def send_message(message, endpoint="tcp://127.0.0.1:5555", timeout=3000, retries=3, context_zmq=7):
-    """
-    Send a message to the Schema validation server
-    :param endpoint:
-    :param timeout:
-    :param retries:
-    :param context_zmq:
-    :param message: JSON structure containing parameters
-    :return:
+    """     Send a message to the Schema validation server
+
+    Args:
+        message: JSON structure containing parameters
+        endpoint:
+        timeout:
+        retries:
+        context_zmq:
+
+    Returns:
+
     """
     context = zmq.Context(context_zmq)
 
