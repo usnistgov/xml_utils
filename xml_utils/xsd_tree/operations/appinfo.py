@@ -48,7 +48,8 @@ def _get_appinfo_element(element, element_name, namespace):
     Returns:
 
     """
-    appinfo_elements = element.findall("./{0}annotation/{0}appinfo/{1}".format(namespace, element_name))
+    element_name_any_namespace = "{*}" + element_name
+    appinfo_elements = element.findall("./{0}annotation/{0}appinfo/{1}".format(namespace, element_name_any_namespace))
 
     if len(appinfo_elements) == 1:
         return appinfo_elements[0]
