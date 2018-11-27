@@ -91,7 +91,7 @@ def _xsd_serialize(xsd_tree, pretty_print=False):
 
     """
     try:
-        xsd_string = etree.tostring(xsd_tree, pretty_print)
+        xsd_string = etree.tostring(xsd_tree, pretty_print=pretty_print)
     except Exception as e:
         raise Exception("XSD serialization error : " + e.message)
     return xsd_string
