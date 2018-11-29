@@ -2,9 +2,11 @@
     Api for XSD and XML validation using xerces server or lxml library
 """
 
-from lxml import etree
-from .xerces.client import send_message
 import json
+
+from lxml import etree
+
+from .xerces.client import send_message
 
 
 def xerces_validate_xsd(xsd_tree):
@@ -41,11 +43,12 @@ def xerces_validate_xml(xsd_tree, xml_tree):
     return send_message(message)
 
 
-def lxml_validate_xsd(xsd_tree):
+def lxml_validate_xsd(xsd_tree, uri_resolver=None):
     """ Validate schema using LXML
 
     Args:
         xsd_tree:
+        uri_resolver:
 
     Returns:
         errors
@@ -53,18 +56,19 @@ def lxml_validate_xsd(xsd_tree):
     """
     error = None
     try:
-        etree.XMLSchema(xsd_tree)
+        _build_etree_schema(xsd_tree, uri_resolver)
     except Exception, e:
         error = e.message
     return error
 
 
-def lxml_validate_xml(xsd_tree, xml_tree):
+def lxml_validate_xml(xsd_tree, xml_tree, uri_resolver=None):
     """ Validate document using LXML
 
     Args:
         xsd_tree:
         xml_tree:
+        uri_resolver:
 
     Returns:
         errors
@@ -72,7 +76,7 @@ def lxml_validate_xml(xsd_tree, xml_tree):
     """
     error = None
     try:
-        xml_schema = etree.XMLSchema(xsd_tree)
+        xml_schema = _build_etree_schema(xsd_tree, uri_resolver)
         xml_schema.assertValid(xml_tree)
     except Exception, e:
         error = e.message
@@ -112,3 +116,19 @@ def _json_serialize(message):
     except Exception as e:
         raise Exception("JSON serialization error : " + e.message)
     return message
+
+
+def _build_etree_schema(xsd_tree, uri_resolver=None):
+    """ Build an lxml etree XMLSchema
+
+    Args:
+        xsd_tree:
+        uri_resolver:
+
+    Returns:
+
+    """
+    if uri_resolver:
+        xsd_tree.parser.resolvers.add(uri_resolver)
+    xml_schema = etree.XMLSchema(xsd_tree)
+    return xml_schema
