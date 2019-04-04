@@ -1,60 +1,82 @@
-import lxml.etree as etree
+""" Package computing the hash a XML string.
+"""
 import hashlib
-import xmltodict
+import json
+from collections import OrderedDict
 from io import BytesIO
-import copy
+
+import six
+import xmltodict
+from lxml import etree
 
 
 def get_hash(xml_string):
-    """ Get the hash of an XML String
+    """ Get the hash of an XML String. Removes blank text, comments,
+    processing instructions and annotations from the input. Allows to
+    retrieve the same hash for two similar XML string.
 
     Args:
-        xml_string: XML String to hash
+        xml_string (str): XML String to hash
 
     Returns:
-
+        str: SHA-1 hash of the XML string
     """
-
+    # Load the required parser
     hash_parser = etree.XMLParser(remove_blank_text=True, remove_comments=True, remove_pis=True)
     etree.set_default_parser(parser=hash_parser)
 
-    # parse the XML String removing blanks, comments, processing instructions
-    try:
-        xml_tree = etree.parse(BytesIO(xml_string.encode('utf-8')))
-    except:
-        xml_tree = etree.parse(BytesIO(xml_string))
-    # remove all annotations
+    # Parse the XML String removing blanks, comments, processing instructions
+    if isinstance(xml_string, six.string_types):
+        xml_string = xml_string.encode("utf-8")
+
+    converted_xml_string = "".join(chr(c) for c in bytearray(xml_string))
+
+    xml_tree = etree.parse(BytesIO(converted_xml_string.encode('utf-8')))
+
+    # Remove all annotations
     annotations = xml_tree.findall(".//{http://www.w3.org/2001/XMLSchema}annotation")
     for annotation in annotations:
         annotation.getparent().remove(annotation)
     clean_xml_string = etree.tostring(xml_tree)
 
-    # transform into dict and order it
+    # Parse XML string into dict
     xml_dict = xmltodict.parse(clean_xml_string, dict_constructor=dict)
-    clean_ordered_xml_string = str(sort_dict(xml_dict))
-
-    # compute the hash
-    hash = hashlib.sha1(clean_ordered_xml_string)
-
-    return hash.hexdigest()
+    # Returns the SHA-1 hash of the ordered dict
+    return hash_dict(xml_dict)
 
 
-def sort_dict(o):
-    """ Return a sorted dictionary
+def hash_dict(xml_dict):
+    # Order dictionary by key
+    xml_dict = OrderedDict(sorted(xml_dict.items(), key=lambda i: i[0]))
 
-    Args:
-        o:
+    # Hash dict according to value
+    for xml_dict_key, xml_dict_val in xml_dict.items():
+        if xml_dict_val is None:
+            continue
 
-    Returns:
+        if type(xml_dict_val) is dict:
+            xml_dict[xml_dict_key] = hash_dict(xml_dict_val)
+        elif type(xml_dict_val) is list:
+            xml_dict[xml_dict_key] = hash_list(xml_dict_val)
+        elif not isinstance(xml_dict_val, six.string_types):
+            raise TypeError("%s is not a type that we can hash" % type(xml_dict_val))
 
-    """
-    if isinstance(o, (set, tuple, list)):
-        return tuple([sort_dict(e) for e in sorted(o)])
-    elif not isinstance(o, dict):
-        return o
+    # Extract string via JSON and compute SHA-1
+    sorted_xml_string = json.dumps(xml_dict)
+    return hashlib.sha1(sorted_xml_string.encode("utf-8")).hexdigest()
 
-    new_o = copy.deepcopy(o)
-    for k, v in new_o.items():
-        new_o[k] = sort_dict(v)
 
-    return tuple(frozenset(sorted(new_o.items())))
+def hash_list(xml_list):
+    xml_list_copy = list()
+
+    for xml_list_val in xml_list:
+        if type(xml_list_val) is dict:
+            xml_list_copy.append(hash_dict(xml_list_val))
+        elif isinstance(xml_list_val, six.string_types):
+            xml_list_copy.append(xml_list_val)
+        else:
+            raise TypeError("%s is not a type that we can hash" % type(xml_list_val))
+
+    # Sort list items and compute SHA-1
+    sorted_xml_list = json.dumps(sorted(xml_list_copy))
+    return hashlib.sha1(sorted_xml_list.encode("utf-8")).hexdigest()

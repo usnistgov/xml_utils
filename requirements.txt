@@ -1,6 +1,7 @@
 Django==1.11.20
 lxml==4.1.1
-xmltodict==0.11.0
-pyzmq==16.0.3
 mock==2.0.0
+pyzmq==16.0.3
+six==1.12.0
 # xerces_wrapper==0.1.0
+xmltodict==0.11.0

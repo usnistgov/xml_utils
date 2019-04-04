@@ -11,58 +11,93 @@ class TestSimpleXSD(TestCase):
         self.content = xsd_file.read()
         self.hash = xsd_hash.get_hash(self.content)
 
-    def test_same(self):
-        # makes sure that the same XSD produces the same hash
+    def test_same_file(self):
+        # Make sure that the same XSD produces the same hash
         xsd_file = open(join(RESOURCES_PATH, 'chemical-element.xsd'), 'r')
         content = xsd_file.read()
         content_hash = xsd_hash.get_hash(content)
         self.assertEqual(self.hash, content_hash)
 
-    def test_spaces(self):
-        # makes sure that an XSD with additional spaces produces the same hash
-        xsd_file = open(join(RESOURCES_PATH, 'spaces-in-element.xsd'), 'r')
+    def test_different_spaces_01(self):
+        # Make sure that an XSD with additional spaces produces the same hash
+        xsd_file = open(join(RESOURCES_PATH, 'chemical-element-spaces-01.xsd'), 'r')
         content = xsd_file.read()
         content_hash = xsd_hash.get_hash(content)
         self.assertEqual(self.hash, content_hash)
 
-    def test_spaces2(self):
-        # makes sure that an XSD with additional spaces, returns,tabs produces the same hash
-        xsd_file = open(join(RESOURCES_PATH, 'spaces-return-tab.xsd'), 'r')
+    def test_different_spaces_02(self):
+        # Make sure that an XSD with additional spaces, returns,tabs produces the same hash
+        xsd_file = open(join(RESOURCES_PATH, 'chemical-element-spaces-02.xsd'), 'r')
         content = xsd_file.read()
         content_hash = xsd_hash.get_hash(content)
         self.assertEqual(self.hash, content_hash)
 
-    def test_comments(self):
-        # makes sure that an XSD with documentation tags produces different hash
-        xsd_file = open(join(RESOURCES_PATH, 'different-comments.xsd'), 'r')
+    def test_different_documentation(self):
+        # Make sure that an XSD with documentation tags produces different hash
+        xsd_file = open(join(RESOURCES_PATH, 'chemical-element-documentation.xsd'), 'r')
         content = xsd_file.read()
         content_hash = xsd_hash.get_hash(content)
         self.assertEqual(self.hash, content_hash)
 
-    def test_different_annotations(self):
-        # makes sure that an XSD with different comments produces the same hash
-        xsd_file = open(join(RESOURCES_PATH, 'different-annotation.xsd'), 'r')
+    def test_different_annotations_01(self):
+        # Make sure that an XSD with different comments produces the same hash
+        xsd_file = open(join(RESOURCES_PATH, 'chemical-element-annot-01.xsd'), 'r')
         content = xsd_file.read()
         content_hash = xsd_hash.get_hash(content)
         self.assertEqual(self.hash, content_hash)
 
-    def test_different_annotations_levels(self):
-        # makes sure that an XSD with different comments produces the same hash
-        xsd_file = open(join(RESOURCES_PATH, 'annotations-levels.xsd'), 'r')
+    def test_different_annotations_02(self):
+        # Make sure that an XSD with different comments produces the same hash
+        xsd_file = open(join(RESOURCES_PATH, 'chemical-element-annot-02.xsd'), 'r')
         content = xsd_file.read()
         content_hash = xsd_hash.get_hash(content)
         self.assertEqual(self.hash, content_hash)
 
     def test_different_namespace(self):
-        # makes sure that an XSD with different comments produces the same hash
-        xsd_file = open(join(RESOURCES_PATH, 'namespace.xsd'), 'r')
+        # Make sure that an XSD with different comments produces the same hash
+        xsd_file = open(join(RESOURCES_PATH, 'chemical-element-namespace.xsd'), 'r')
         content = xsd_file.read()
         content_hash = xsd_hash.get_hash(content)
         self.assertNotEqual(self.hash, content_hash)
 
     def test_wrong_enum(self):
-        # makes sure that an XSD with different enumeration does not produce the same hash
-        xsd_file = open(join(RESOURCES_PATH, 'wrong-enum.xsd'), 'r')
+        # Make sure that an XSD with different enumeration does not produce the same hash
+        xsd_file = open(join(RESOURCES_PATH, 'chemical-element-enum.xsd'), 'r')
+        content = xsd_file.read()
+        content_hash = xsd_hash.get_hash(content)
+        self.assertNotEqual(self.hash, content_hash)
+
+
+class TestCommonXSD(TestCase):
+    def setUp(self):
+        xsd_file = open(join(RESOURCES_PATH, 'composition.xsd'), 'r')
+        self.content = xsd_file.read()
+        self.hash = xsd_hash.get_hash(self.content)
+
+    def test_same_file(self):
+        # Make sure that the same XSD produces the same hash
+        xsd_file = open(join(RESOURCES_PATH, 'composition.xsd'), 'r')
+        content = xsd_file.read()
+        content_hash = xsd_hash.get_hash(content)
+        self.assertEqual(self.hash, content_hash)
+
+    def test_mixed_order(self):
+        # Make sure that an XSD with elements in a different order produces the same hash
+        xsd_file = open(join(RESOURCES_PATH, 'composition-mixed.xsd'), 'r')
+        content = xsd_file.read()
+        content_hash = xsd_hash.get_hash(content)
+        self.assertEqual(self.hash, content_hash)
+
+    def test_different_root(self):
+        # Make sure that an XSD with different root names does not produce the same hash
+        xsd_file = open(join(RESOURCES_PATH, 'composition-root-name.xsd'), 'r')
+        content = xsd_file.read()
+        content_hash = xsd_hash.get_hash(content)
+        self.assertNotEqual(self.hash, content_hash)
+
+    def test_different_type(self):
+        # Make sure that an XSD with different type names does not produce the same hash
+        xsd_file = open(join(RESOURCES_PATH, 'composition-type-name.xsd'), 'r')
         content = xsd_file.read()
         content_hash = xsd_hash.get_hash(content)
         self.assertNotEqual(self.hash, content_hash)
@@ -70,55 +105,30 @@ class TestSimpleXSD(TestCase):
 
 class TestComplexXSD(TestCase):
     def setUp(self):
-        xsd_file = open(join(RESOURCES_PATH, 'composition.xsd'), 'r')
+        xsd_file = open(join(RESOURCES_PATH, 'diffusion.xsd'), 'r')
         self.content = xsd_file.read()
         self.hash = xsd_hash.get_hash(self.content)
 
     def test_same(self):
-        # makes sure that the same XSD produces the same hash
-        xsd_file = open(join(RESOURCES_PATH, 'composition.xsd'), 'r')
+        # Make sure that the same XSD produces the same hash
+        xsd_file = open(join(RESOURCES_PATH, 'diffusion.xsd'), 'r')
         content = xsd_file.read()
         content_hash = xsd_hash.get_hash(content)
         self.assertEqual(self.hash, content_hash)
 
-    def test_order(self):
-        # makes sure that an XSD with elements in a different order produces the same hash
-        xsd_file = open(join(RESOURCES_PATH, 'order.xsd'), 'r')
+    def test_mixed_order(self):
+        # Make sure that an XSD with elements in a different order produces the same hash
+        xsd_file = open(join(RESOURCES_PATH, 'diffusion-mixed.xsd'), 'r')
         content = xsd_file.read()
         content_hash = xsd_hash.get_hash(content)
         self.assertEqual(self.hash, content_hash)
 
-    def test_root(self):
-        # makes sure that an XSD with different root names does not produce the same hash
-        xsd_file = open(join(RESOURCES_PATH, 'root-name.xsd'), 'r')
+class TestRegistryXSD(TestCase):
+    def test_hash_value(self):
+        res_md_hash = "4735069b4332ee196e95b4db7877b6dcea9692ec"
+
+        xsd_file = open(join(RESOURCES_PATH, 'res-md.xsd'), 'r')
         content = xsd_file.read()
         content_hash = xsd_hash.get_hash(content)
-        self.assertNotEqual(self.hash, content_hash)
+        self.assertEqual(res_md_hash, content_hash)
 
-    def test_type(self):
-        # makes sure that an XSD with different type names does not produce the same hash
-        xsd_file = open(join(RESOURCES_PATH, 'type-name.xsd'), 'r')
-        content = xsd_file.read()
-        content_hash = xsd_hash.get_hash(content)
-        self.assertNotEqual(self.hash, content_hash)
-
-
-class TestMoreComplexXSD(TestCase):
-    def setUp(self):
-        xsd_file = open(join(RESOURCES_PATH, 'demo.diffusion.xsd'), 'r')
-        self.content = xsd_file.read()
-        self.hash = xsd_hash.get_hash(self.content)
-
-    def test_same(self):
-        # makes sure that the same XSD produces the same hash
-        xsd_file = open(join(RESOURCES_PATH, 'demo.diffusion.xsd'), 'r')
-        content = xsd_file.read()
-        content_hash = xsd_hash.get_hash(content)
-        self.assertEqual(self.hash, content_hash)
-
-    def test_order(self):
-        # makes sure that an XSD with elements in a different order produces the same hash
-        xsd_file = open(join(RESOURCES_PATH, 'order2.xsd'), 'r')
-        content = xsd_file.read()
-        content_hash = xsd_hash.get_hash(content)
-        self.assertEqual(self.hash, content_hash)
