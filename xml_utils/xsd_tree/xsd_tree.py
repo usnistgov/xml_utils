@@ -24,10 +24,11 @@ class XSDTree(object):
 
         """
         try:
-            xml_tree = etree.parse(BytesIO(xml_string.encode('utf-8')))
+            xml_string = BytesIO(xml_string.encode('utf-8'))
         except Exception:
-            xml_tree = etree.parse(BytesIO(xml_string))
-        return xml_tree
+            xml_string = BytesIO(xml_string)
+
+        return etree.parse(xml_string)
 
     @staticmethod
     def tostring(xml_tree, pretty=False):
