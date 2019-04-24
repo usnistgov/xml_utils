@@ -85,7 +85,7 @@ class XSDFlattener(object):
                 flat_dependency = self.get_flat_dependency(uri)
                 # replace the include by its content
                 XSDFlattener._replace_include_by_content(xml_tree, include_element, flat_dependency)
-        return etree.tostring(xml_tree)
+        return XSDTree.tostring(xml_tree)
 
     @staticmethod
     def _replace_include_by_content(xml_tree, include_element, dependency_content):
@@ -101,7 +101,7 @@ class XSDFlattener(object):
         """
         if dependency_content is not None:
             # build the tree of the dependency
-            dependency_tree = etree.fromstring(dependency_content)
+            dependency_tree = XSDTree.fromstring(dependency_content)
             # get elements from dependency
             dependency_elements = dependency_tree.getchildren()
             # appends elements from dependency to tree

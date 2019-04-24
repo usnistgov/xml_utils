@@ -76,17 +76,18 @@ class XSDTree(object):
             return etree.XML(xml_string.encode('utf-8'))
 
     @staticmethod
-    def fromstring(xml_string):
+    def fromstring(xml_string, parser=None):
         """ Convert a string to an XML tree
 
         Args:
             xml_string:
+            parser:
 
         Returns:
 
         """
         try:
-            return etree.fromstring(xml_string)
+            return etree.fromstring(xml_string, parser=parser)
         except Exception as e:
             raise exceptions.XMLError(e.message)
 

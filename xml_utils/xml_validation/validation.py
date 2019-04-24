@@ -6,6 +6,7 @@ import json
 
 from lxml import etree
 
+from xml_utils.xsd_tree.xsd_tree import XSDTree
 from .xerces.client import send_message
 
 
@@ -95,7 +96,7 @@ def _xsd_serialize(xsd_tree, pretty_print=False):
 
     """
     try:
-        xsd_string = etree.tostring(xsd_tree, pretty_print=pretty_print)
+        xsd_string = XSDTree.tostring(xsd_tree, pretty=pretty_print)
     except Exception as e:
         raise Exception("XSD serialization error : " + e.message)
     return xsd_string

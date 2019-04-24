@@ -9,6 +9,8 @@ import six
 import xmltodict
 from lxml import etree
 
+from xml_utils.xsd_tree.xsd_tree import XSDTree
+
 
 def get_hash(xml_string):
     """ Get the hash of an XML String. Removes blank text, comments,
@@ -31,13 +33,13 @@ def get_hash(xml_string):
 
     converted_xml_string = "".join(chr(c) for c in bytearray(xml_string))
 
-    xml_tree = etree.parse(BytesIO(converted_xml_string.encode('utf-8')))
+    xml_tree = XSDTree.build_tree(converted_xml_string)
 
     # Remove all annotations
     annotations = xml_tree.findall(".//{http://www.w3.org/2001/XMLSchema}annotation")
     for annotation in annotations:
         annotation.getparent().remove(annotation)
-    clean_xml_string = etree.tostring(xml_tree)
+    clean_xml_string = XSDTree.tostring(xml_tree)
 
     # Parse XML string into dict
     xml_dict = xmltodict.parse(clean_xml_string, dict_constructor=dict)

@@ -3,6 +3,7 @@
 from lxml import etree, html
 from lxml.html.diff import htmldiff
 from xml_utils.commons.exceptions import HTMLError
+from xml_utils.xsd_tree.xsd_tree import XSDTree
 
 
 def parse_html(html_text, parent_tag=''):
@@ -17,7 +18,7 @@ def parse_html(html_text, parent_tag=''):
     Raises:
     """
     try:
-        return etree.fromstring("<%s>%s</%s>" % (parent_tag, html_text, parent_tag))
+        return XSDTree.fromstring("<%s>%s</%s>" % (parent_tag, html_text, parent_tag))
     except Exception as e:
         raise HTMLError(e.message)
 
@@ -30,7 +31,7 @@ def safe_html(html_text):
 
     Returns:
     """
-    return etree.tostring(html.fragment_fromstring(html_text, create_parent='div'))
+    return html.tostring(html.fragment_fromstring(html_text, create_parent='div'))
 
 
 def from_string(html_content, base_url=None, parser=None, **kw):
