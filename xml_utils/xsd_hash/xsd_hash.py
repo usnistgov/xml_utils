@@ -27,13 +27,7 @@ def get_hash(xml_string):
     hash_parser = etree.XMLParser(remove_blank_text=True, remove_comments=True, remove_pis=True)
     etree.set_default_parser(parser=hash_parser)
 
-    # Parse the XML String removing blanks, comments, processing instructions
-    if isinstance(xml_string, six.string_types):
-        xml_string = xml_string.encode("utf-8")
-
-    converted_xml_string = "".join(chr(c) for c in bytearray(xml_string))
-
-    xml_tree = XSDTree.build_tree(converted_xml_string)
+    xml_tree = XSDTree.build_tree(xml_string)
 
     # Remove all annotations
     annotations = xml_tree.findall(".//{http://www.w3.org/2001/XMLSchema}annotation")
