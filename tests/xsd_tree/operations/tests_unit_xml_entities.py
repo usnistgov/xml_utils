@@ -5,7 +5,7 @@ from unittest import TestCase
 from xml_utils.xsd_tree.operations.xml_entities import XmlEntities
 
 
-class TestRemoveAnnotations(TestCase):
+class TestEscapeXmlEntities(TestCase):
     def test_escape_with_predefined_xml_entities(self):
         string = 'aaa<bbb>ccc&ddd\'eee"fff'
 
