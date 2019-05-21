@@ -58,7 +58,7 @@ def lxml_validate_xsd(xsd_tree, uri_resolver=None):
     error = None
     try:
         _build_etree_schema(xsd_tree, uri_resolver)
-    except Exception, e:
+    except Exception as e:
         error = e.message
     return error
 
@@ -79,7 +79,7 @@ def lxml_validate_xml(xsd_tree, xml_tree, uri_resolver=None):
     try:
         xml_schema = _build_etree_schema(xsd_tree, uri_resolver)
         xml_schema.assertValid(xml_tree)
-    except Exception, e:
+    except Exception as e:
         error = e.message
     return error
 

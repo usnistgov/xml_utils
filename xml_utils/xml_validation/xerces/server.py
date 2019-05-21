@@ -1,3 +1,4 @@
+from __future__ import print_function
 import zmq
 import time
 import json
@@ -14,10 +15,10 @@ def _xerces_exists():
     try:
         __import__('xerces_wrapper')
     except ImportError:
-        print "XERCES DOES NOT EXIST"
+        print("XERCES DOES NOT EXIST")
         return False
     else:
-        print "XERCES EXISTS"
+        print("XERCES EXISTS")
         return True
 
 
@@ -33,11 +34,11 @@ def _xerces_validate_xsd(xsd_string):
     """
     if _xerces_exists():
         import xerces_wrapper
-        print "XERCES IMPORTED"
+        print("XERCES IMPORTED")
         error = xerces_wrapper.validate_xsd(xsd_string)
-        print "SCHEMA validated"
+        print("SCHEMA validated")
         if len(error) <= 1:
-            print "SCHEMA valid"
+            print("SCHEMA valid")
             error = None
 
         return error
@@ -58,11 +59,11 @@ def _xerces_validate_xml(xsd_string, xml_string):
     """
     if _xerces_exists():
         import xerces_wrapper
-        print "XERCES IMPORTED"
+        print("XERCES IMPORTED")
         error = xerces_wrapper.validate_xml(xsd_string, xml_string)
-        print "DATA validated"
+        print("DATA validated")
         if len(error) <= 1:
-            print "DATA valid"
+            print("DATA valid")
             error = None
 
         return error
@@ -110,14 +111,14 @@ def main(argv):
         if mutex:
             #  Wait for next request from client
             message = socket.recv()
-            print "Received request"
+            print("Received request")
 
             try:
                 message = json.loads(message)
 
                 # validate data against schema
                 if 'xml_string' in message:
-                    print "VALIDATE XML"
+                    print("VALIDATE XML")
                     mutex = False
                     try:
                         xsd_string = message['xsd_string'].encode('utf-8')
@@ -136,7 +137,7 @@ def main(argv):
 
                     response = error
                 else:
-                    print "VALIDATE XSD"
+                    print("VALIDATE XSD")
                     mutex = False
                     try:
                         xsd_string = message['xsd_string'].encode('utf-8')
@@ -150,13 +151,13 @@ def main(argv):
 
                     response = error
 
-                print response
+                print(response)
 
                 socket.send(str(response))
                 mutex = True
-                print "Sent response"
-            except Exception, e:
-                print e.message
+                print("Sent response")
+            except Exception as e:
+                print(e.message)
                 pass
 
         time.sleep(1)
