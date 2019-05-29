@@ -1,9 +1,15 @@
 """XSD Flattener URL class
 """
 
-import urllib2
+import urllib.error
+import urllib.parse
+import urllib.request
+
+from future import standard_library
+
 from xml_utils.xsd_flattener.xsd_flattener import XSDFlattener
 
+standard_library.install_aliases()
 
 class XSDFlattenerURL(XSDFlattener):
     """XSD Flattener class getting dependencies by URL
@@ -31,7 +37,7 @@ class XSDFlattenerURL(XSDFlattener):
         content = ""
 
         if self.download_enabled:
-            dependency_file = urllib2.urlopen(uri)
+            dependency_file = urllib.request.urlopen(uri)
             content = dependency_file.read()
 
         return content

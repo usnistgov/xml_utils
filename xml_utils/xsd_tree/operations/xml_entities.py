@@ -1,9 +1,10 @@
 """Predefined xml entities operations
 """
 import re
+from builtins import object
 
 
-class XmlEntities:
+class XmlEntities(object):
 
     def __init__(self):
         """Escape all the predefined xml entities

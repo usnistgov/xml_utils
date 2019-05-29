@@ -3,7 +3,6 @@
 import hashlib
 import json
 from collections import OrderedDict
-from io import BytesIO
 
 import six
 import xmltodict
@@ -43,10 +42,10 @@ def get_hash(xml_string):
 
 def hash_dict(xml_dict):
     # Order dictionary by key
-    xml_dict = OrderedDict(sorted(xml_dict.items(), key=lambda i: i[0]))
+    xml_dict = OrderedDict(sorted(list(xml_dict.items()), key=lambda i: i[0]))
 
     # Hash dict according to value
-    for xml_dict_key, xml_dict_val in xml_dict.items():
+    for xml_dict_key, xml_dict_val in list(xml_dict.items()):
         if xml_dict_val is None:
             continue
 

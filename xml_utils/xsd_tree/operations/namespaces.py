@@ -38,7 +38,7 @@ def get_default_prefix(namespaces):
 
     """
     default_prefix = ''
-    for prefix, url in namespaces.items():
+    for prefix, url in list(namespaces.items()):
         if url == xml_utils_constants.SCHEMA_NAMESPACE:
             default_prefix = prefix
             break
@@ -86,7 +86,7 @@ def get_target_namespace(xsd_tree, namespaces):
     # if a target namespace is present
     if target_namespace is not None:
         # iterate through namespaces
-        for prefix, url in namespaces.items():
+        for prefix, url in list(namespaces.items()):
             # if an url matching the target namespace is found
             if url == target_namespace:
                 # set the target namespace prefix with the associated prefix

@@ -59,7 +59,7 @@ def lxml_validate_xsd(xsd_tree, uri_resolver=None):
     try:
         _build_etree_schema(xsd_tree, uri_resolver)
     except Exception as e:
-        error = e.message
+        error = str(e)
     return error
 
 
@@ -80,7 +80,7 @@ def lxml_validate_xml(xsd_tree, xml_tree, uri_resolver=None):
         xml_schema = _build_etree_schema(xsd_tree, uri_resolver)
         xml_schema.assertValid(xml_tree)
     except Exception as e:
-        error = e.message
+        error = str(e)
     return error
 
 
@@ -98,7 +98,7 @@ def _xsd_serialize(xsd_tree, pretty_print=False):
     try:
         xsd_string = XSDTree.tostring(xsd_tree, pretty=pretty_print)
     except Exception as e:
-        raise Exception("XSD serialization error : " + e.message)
+        raise Exception("XSD serialization error : " + str(e))
     return xsd_string
 
 
@@ -115,7 +115,7 @@ def _json_serialize(message):
     try:
         message = json.dumps(message)
     except Exception as e:
-        raise Exception("JSON serialization error : " + e.message)
+        raise Exception("JSON serialization error : " + str(e))
     return message
 
 

@@ -13,7 +13,7 @@ class TestGetNamespaces(TestCase):
     def test_get_namespaces_one_namespace_prefix_is_key(self):
         xsd_string = "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'></xs:schema>"
         namespaces = get_namespaces(xsd_string)
-        self.assertTrue('xs' in namespaces.keys())
+        self.assertTrue('xs' in list(namespaces.keys()))
 
     def test_get_namespaces_one_namespace_namespace_is_value(self):
         xsd_string = "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'></xs:schema>"
@@ -23,7 +23,7 @@ class TestGetNamespaces(TestCase):
     def test_get_namespaces_two_namespaces(self):
         xsd_string = "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:test='test'></xs:schema>"
         namespaces = get_namespaces(xsd_string)
-        self.assertTrue('xs' in namespaces.keys() and 'test' in namespaces.keys())
+        self.assertTrue('xs' in list(namespaces.keys()) and 'test' in list(namespaces.keys()))
 
     def test_get_namespaces_invalid_file(self):
         xsd_string = "invalid"
@@ -33,7 +33,7 @@ class TestGetNamespaces(TestCase):
     def test_get_namespaces_xml_namespace(self):
         xsd_string = "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'></xs:schema>"
         namespaces = get_namespaces(xsd_string)
-        self.assertTrue('xml' in namespaces.keys())
+        self.assertTrue('xml' in list(namespaces.keys()))
 
 
 class TestGetGlobalNamespace(TestCase):

@@ -42,9 +42,9 @@ class XSDTree(object):
 
         """
         try:
-            return etree.tostring(xml_tree, pretty_print=pretty)
+            return etree.tostring(xml_tree, pretty_print=pretty, encoding='unicode')
         except Exception as e:
-            raise exceptions.XMLError(e.message)
+            raise exceptions.XMLError(str(e))
 
     @staticmethod
     def transform_to_xslt(xml_parsed):
@@ -90,7 +90,7 @@ class XSDTree(object):
         try:
             return etree.fromstring(xml_string, parser=parser)
         except Exception as e:
-            raise exceptions.XMLError(e.message)
+            raise exceptions.XMLError(str(e))
 
     @staticmethod
     def iterfind(xml_string, match):
@@ -107,7 +107,7 @@ class XSDTree(object):
             xml_tree = XSDTree.build_tree(xml_string)
             return xml_tree.iterfind(match)
         except Exception as e:
-            raise exceptions.XMLError(e.message)
+            raise exceptions.XMLError(str(e))
 
     @staticmethod
     def iterparse(xml_string, events):
@@ -124,7 +124,7 @@ class XSDTree(object):
             xml_file = BytesIO(xml_string.encode('utf-8'))
             return etree.iterparse(xml_file, events)
         except Exception as e:
-            raise exceptions.XMLError(e.message)
+            raise exceptions.XMLError(str(e))
 
     @staticmethod
     def get_extension(xml_tree):
@@ -140,7 +140,7 @@ class XSDTree(object):
             return xml_tree.find("//xsl:output",
                                  namespaces={'xsl': xml_constants.XSL_NAMESPACE}).attrib['method']
         except Exception as e:
-            raise exceptions.XMLError(e.message)
+            raise exceptions.XMLError(str(e))
 
     @staticmethod
     def create_element(tag, attrib=None, nsmap=None, **extra):
