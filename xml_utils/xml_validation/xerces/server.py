@@ -158,7 +158,7 @@ def main(argv):
                 mutex = True
                 print("Sent response")
             except Exception as e:
-                print(e.message)
+                print(str(e))
                 pass
 
         time.sleep(1)

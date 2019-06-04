@@ -20,7 +20,7 @@ def parse_html(html_text, parent_tag=''):
     try:
         return XSDTree.fromstring("<%s>%s</%s>" % (parent_tag, html_text, parent_tag))
     except Exception as e:
-        raise HTMLError(e.message)
+        raise HTMLError(str(e))
 
 
 def safe_html(html_text):
