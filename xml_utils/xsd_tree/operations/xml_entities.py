@@ -1,7 +1,6 @@
 """Predefined xml entities operations
 """
 import re
-from builtins import object
 
 
 class XmlEntities(object):

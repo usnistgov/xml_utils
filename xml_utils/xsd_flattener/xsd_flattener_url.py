@@ -5,11 +5,9 @@ import urllib.error
 import urllib.parse
 import urllib.request
 
-from future import standard_library
 
 from xml_utils.xsd_flattener.xsd_flattener import XSDFlattener
 
-standard_library.install_aliases()
 
 class XSDFlattenerURL(XSDFlattener):
     """XSD Flattener class getting dependencies by URL

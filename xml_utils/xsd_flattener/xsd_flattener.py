@@ -1,16 +1,14 @@
 """ XSD Flattener abstract class
 """
 from abc import ABCMeta, abstractmethod
-from builtins import object
 
 import lxml.etree as etree
-from future.utils import with_metaclass
 
 import xml_utils.commons.constants as constants
 from xml_utils.xsd_tree.xsd_tree import XSDTree
 
 
-class XSDFlattener(with_metaclass(ABCMeta, object)):
+class XSDFlattener(object, metaclass=ABCMeta):
     """ Abstract XSD Flattener class
     """
 

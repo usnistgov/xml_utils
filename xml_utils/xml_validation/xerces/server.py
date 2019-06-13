@@ -1,9 +1,7 @@
 """ Server code for Xerces validator.
 """
 from __future__ import print_function
-
 import logging
-from builtins import str
 import zmq
 import time
 import json
