@@ -1,5 +1,12 @@
+""" Client library for Xerces validator.
+"""
 from __future__ import print_function
+
+import logging
+
 import zmq
+
+logger = logging.getLogger(__name__)
 
 
 def send_message(message, endpoint="tcp://127.0.0.1:5555", timeout=3000, retries=3, context_zmq=7):
@@ -17,7 +24,7 @@ def send_message(message, endpoint="tcp://127.0.0.1:5555", timeout=3000, retries
     """
     context = zmq.Context(context_zmq)
 
-    print("Connecting to server...")
+    logger.debug("Connecting to server...")
     socket = context.socket(zmq.REQ)
     socket.connect(endpoint)
 
@@ -26,11 +33,12 @@ def send_message(message, endpoint="tcp://127.0.0.1:5555", timeout=3000, retries
 
     retries_left = retries
     request = 0
+    reply = ""
 
     while retries_left:
         request += 1
 
-        print("Sending request %s..." % request)
+        logger.info("Sending request %s..." % request)
         socket.send(message)
 
         expect_reply = True
@@ -41,22 +49,24 @@ def send_message(message, endpoint="tcp://127.0.0.1:5555", timeout=3000, retries
                 if not reply:
                     break
                 else:
-                    print(reply)
+                    logger.info("Answer: %s" % reply)
                     if reply == 'ok':
                         reply = None
                     retries_left = 0
                     expect_reply = False
             else:
-                print("No response from server, retrying...")
+                logger.warning("No response from server, retrying...")
                 # Socket is confused. Close and remove it.
                 socket.setsockopt(zmq.LINGER, 0)
                 socket.close()
                 poll.unregister(socket)
                 retries_left -= 1
                 if retries_left == 0:
-                    reply = "Error : XML Validation server seems to be offline, please contact the administrator."
+                    reply = "Error: XML Validation server seems to be offline, please contact " \
+                            "the administrator."
                     break
-                print("Reconnecting and resending...")
+
+                logger.info("Reconnecting and resending...")
                 # Create new connection
                 socket = context.socket(zmq.REQ)
                 socket.connect(endpoint)

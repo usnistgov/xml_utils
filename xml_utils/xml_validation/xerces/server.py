@@ -1,10 +1,16 @@
+""" Server code for Xerces validator.
+"""
 from __future__ import print_function
+
+import logging
 from builtins import str
 import zmq
 import time
 import json
 import sys
 import argparse
+
+logger = logging.getLogger(__name__)
 
 
 def _xerces_exists():
@@ -14,12 +20,12 @@ def _xerces_exists():
 
     """
     try:
-        __import__('xerces_wrapper')
+        __import__("xerces_wrapper")
     except ImportError:
-        print("XERCES DOES NOT EXIST")
+        logger.error("XERCES DOES NOT EXIST")
         return False
     else:
-        print("XERCES EXISTS")
+        logger.debug("XERCES EXISTS")
         return True
 
 
@@ -35,11 +41,11 @@ def _xerces_validate_xsd(xsd_string):
     """
     if _xerces_exists():
         import xerces_wrapper
-        print("XERCES IMPORTED")
+        logger.debug("XERCES IMPORTED")
         error = xerces_wrapper.validate_xsd(xsd_string)
-        print("SCHEMA validated")
+        logger.debug("SCHEMA validated")
         if len(error) <= 1:
-            print("SCHEMA valid")
+            logger.debug("SCHEMA valid")
             error = None
 
         return error
@@ -60,11 +66,11 @@ def _xerces_validate_xml(xsd_string, xml_string):
     """
     if _xerces_exists():
         import xerces_wrapper
-        print("XERCES IMPORTED")
+        logger.debug("XERCES IMPORTED")
         error = xerces_wrapper.validate_xml(xsd_string, xml_string)
-        print("DATA validated")
+        logger.debug("DATA validated")
         if len(error) <= 1:
-            print("DATA valid")
+            logger.debug("DATA valid")
             error = None
 
         return error
@@ -76,15 +82,15 @@ def main(argv):
     parser = argparse.ArgumentParser(description="Launch Server Tool")
 
     # add optional arguments
-    parser.add_argument('-e',
-                        '--endpoint',
-                        help='Listening endpoint',
+    parser.add_argument("-e",
+                        "--endpoint",
+                        help="Listening endpoint",
                         nargs=1,
                         required=True)
 
-    parser.add_argument('-c',
-                        '--contextzmq',
-                        help='Context zmq',
+    parser.add_argument("-c",
+                        "--contextzmq",
+                        help="Context zmq",
                         nargs=1,
                         required=True)
 
@@ -95,7 +101,7 @@ def main(argv):
     if args.endpoint:
         endpoint = args.endpoint[0]
     else:
-        endpoint = 'tcp://127.0.0.1:5555'
+        endpoint = "tcp://127.0.0.1:5555"
 
     if args.contextzmq:
         context_zmq = int(args.contextzmq[0])
@@ -112,54 +118,53 @@ def main(argv):
         if mutex:
             #  Wait for next request from client
             message = socket.recv()
-            print("Received request")
+            logger.debug("Received request")
 
             try:
                 message = json.loads(message)
 
                 # validate data against schema
-                if 'xml_string' in message:
-                    print("VALIDATE XML")
+                if "xml_string" in message:
+                    logger.debug("VALIDATE XML")
                     mutex = False
                     try:
-                        xsd_string = message['xsd_string'].encode('utf-8')
-                    except:
-                        xsd_string = message['xsd_string']
+                        xsd_string = message["xsd_string"].encode("utf-8")
+                    except UnicodeEncodeError:
+                        xsd_string = message["xsd_string"]
 
                     try:
-                        xml_string = message['xml_string'].encode('utf-8')
-                    except:
-                        xml_string = message['xml_string']
+                        xml_string = message["xml_string"].encode("utf-8")
+                    except UnicodeEncodeError:
+                        xml_string = message["xml_string"]
 
                     error = _xerces_validate_xml(xsd_string, xml_string)
 
                     if error is None:
-                        error = 'ok'
+                        error = "ok"
 
                     response = error
                 else:
-                    print("VALIDATE XSD")
+                    logger.debug("VALIDATE XSD")
                     mutex = False
                     try:
-                        xsd_string = message['xsd_string'].encode('utf-8')
-                    except:
-                        xsd_string = message['xsd_string']
+                        xsd_string = message["xsd_string"].encode("utf-8")
+                    except UnicodeEncodeError:
+                        xsd_string = message["xsd_string"]
 
                     error = _xerces_validate_xsd(xsd_string)
 
                     if error is None:
-                        error = 'ok'
+                        error = "ok"
 
                     response = error
 
-                print(response)
+                logger.debug(response)
 
                 socket.send(str(response))
                 mutex = True
-                print("Sent response")
+                logger.debug("Sent response")
             except Exception as e:
-                print(str(e))
-                pass
+                logger.error(str(e))
 
         time.sleep(1)
 
