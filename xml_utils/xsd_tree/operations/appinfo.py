@@ -1,11 +1,12 @@
 """XSD Tree operations on appinfo
 """
+from lxml import etree
+
+from xml_utils.commons import constants as xml_utils_constants
 from xml_utils.commons.exceptions import XMLError
 from xml_utils.xsd_tree.operations.namespaces import get_namespaces
 from xml_utils.xsd_tree.operations.xpath import get_element_by_xpath
 from xml_utils.xsd_tree.xsd_tree import XSDTree
-from xml_utils.commons import constants as xml_utils_constants
-from lxml import etree
 
 
 def add_appinfo_element(xsd_string, xpath, appinfo_name, value):

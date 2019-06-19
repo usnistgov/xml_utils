@@ -5,7 +5,6 @@ import urllib.error
 import urllib.parse
 import urllib.request
 
-
 from xml_utils.xsd_flattener.xsd_flattener import XSDFlattener
 
 

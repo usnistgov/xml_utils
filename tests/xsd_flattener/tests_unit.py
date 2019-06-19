@@ -1,8 +1,9 @@
 from os.path import join, dirname
 from unittest import TestCase
-from mock.mock import patch
-from xml_utils.xsd_flattener.xsd_flattener_url import XSDFlattenerURL
 
+from mock.mock import patch
+
+from xml_utils.xsd_flattener.xsd_flattener_url import XSDFlattenerURL
 
 RESOURCES_PATH = join(dirname(__file__), 'data')
 

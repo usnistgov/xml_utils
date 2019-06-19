@@ -1,6 +1,7 @@
 """Unit tests for attributes operations
 """
 from unittest import TestCase
+
 from lxml import etree
 
 from xml_utils.commons.exceptions import XMLError

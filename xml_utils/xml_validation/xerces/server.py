@@ -1,12 +1,14 @@
 """ Server code for Xerces validator.
 """
 from __future__ import print_function
-import logging
-import zmq
-import time
-import json
-import sys
+
 import argparse
+import json
+import logging
+import sys
+import time
+
+import zmq
 
 logger = logging.getLogger(__name__)
 

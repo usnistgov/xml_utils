@@ -1,7 +1,8 @@
 """ Package parsing HTML
 """
-from lxml import etree, html
+from lxml import html
 from lxml.html.diff import htmldiff
+
 from xml_utils.commons.exceptions import HTMLError
 from xml_utils.xsd_tree.xsd_tree import XSDTree
 

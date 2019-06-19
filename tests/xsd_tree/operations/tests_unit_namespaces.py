@@ -1,7 +1,9 @@
 """Unit tests for namespaces operations
 """
 from unittest import TestCase
+
 from lxml import etree
+
 from xml_utils.xsd_tree.operations.namespaces import get_namespaces, get_default_prefix, get_target_namespace
 from xml_utils.xsd_tree.xsd_tree import XSDTree
 

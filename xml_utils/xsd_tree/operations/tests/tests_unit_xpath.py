@@ -1,6 +1,7 @@
 """Unit tests for xpath operations
 """
 from unittest import TestCase
+
 from xml_utils.commons.exceptions import XMLError
 from xml_utils.xsd_tree.operations.namespaces import get_namespaces
 from xml_utils.xsd_tree.operations.xpath import get_element_by_xpath

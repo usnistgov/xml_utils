@@ -1,6 +1,7 @@
 import codecs
-from unittest import TestCase
 from os.path import join, dirname, abspath
+from unittest import TestCase
+
 from xml_utils.xsd_hash import xsd_hash
 
 RESOURCES_PATH = join(dirname(abspath(__file__)), 'data')
