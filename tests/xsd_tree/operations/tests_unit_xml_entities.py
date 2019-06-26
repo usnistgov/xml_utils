@@ -43,3 +43,22 @@ class TestEscapeXmlEntities(TestCase):
         self.assertTrue(xmlEntities.escape_xml_entities(string) == '&lt;&lt;&quot;&gt;&amp;&amp;&lt;')
         self.assertTrue(xmlEntities.unescaped_xml_string == string)
         self.assertTrue(xmlEntities.number_of_subs_made == 4)
+
+
+    def test_unescaped_with_predefined_xml_entities(self):
+        string = '<&lt;&quot;>&&&lt;'
+
+        self.assertTrue(XmlEntities.unescape_xml_entities(string)[0] == '<<">&&<')
+        self.assertTrue(XmlEntities.unescape_xml_entities(string)[1] == 3)
+
+    def test_unescaped_without_predefined_xml_entities(self):
+        string = 'aaabbbcccdddeee'
+
+        self.assertTrue(XmlEntities.unescape_xml_entities(string)[0] == 'aaabbbcccdddeee')
+        self.assertTrue(XmlEntities.unescape_xml_entities(string)[1] == 0)
+
+    def test_unescaped_only_escaped_predefined_xml_entities(self):
+        string = '&lt;&lt;&lt;&quot;&quot;&apos;&apos;&apos;&apos;&apos;&apos;&apos;&quot;&quot;&quot;&gt;&gt;&gt;'
+
+        self.assertTrue(XmlEntities.unescape_xml_entities(string)[0] == '<<<""\'\'\'\'\'\'\'""">>>')
+        self.assertTrue(XmlEntities.unescape_xml_entities(string)[1] == 18)

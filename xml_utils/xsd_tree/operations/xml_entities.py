@@ -59,3 +59,55 @@ class XmlEntities(object):
             self.number_of_subs_made += subn_tuple[1]
 
         return self.escaped_xml_string
+
+    @staticmethod
+    def unescape_xml_entities(xml_string):
+        """Unescape all the predefined xml entities
+
+        Args:
+            xml_string:
+
+        Returns:
+            tuple<string, number>: Tuple with the unescaped string and the number of substitutions done
+
+        """
+
+        unescape_string = xml_string
+        subs_number = 0
+        # table which match a escaped predefined xml entities with a regex to find those occurence
+        regex_match_table = [
+            {
+                "char": "&",
+                "regex": "(&amp;)"
+            },
+            {
+                "char": ">",
+                "regex": "(&gt;)"
+            },
+            {
+                "char": "<",
+                "regex": "(&lt;)"
+            },
+            {
+                "char": "'",
+                "regex": "(&apos;)"
+            },
+            {
+                "char": '"',
+                "regex": '(&quot;)'
+            }
+        ]
+
+        # for all escaped predefined xml entities in the match table
+        for subn_regex in regex_match_table:
+
+            # compile the regex
+            regex = re.compile(subn_regex["regex"])
+
+            # substitute the predefined xml entities found by this unescaped version
+            subn_tuple = re.subn(regex, subn_regex["char"], unescape_string)
+
+            unescape_string = subn_tuple[0]
+            subs_number += subn_tuple[1]
+
+        return unescape_string, subs_number
