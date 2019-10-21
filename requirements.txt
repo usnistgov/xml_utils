@@ -1,8 +1,7 @@
-Django==1.11.23
+future==0.17.1
 lxml==4.1.1
 mock==2.0.0
-pyzmq==16.0.3
+pyzmq==18.1.0
 six==1.12.0
 # xerces_wrapper==0.1.0
 xmltodict==0.11.0
-future==0.17.1

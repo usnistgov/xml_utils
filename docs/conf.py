@@ -18,12 +18,6 @@
 import os
 import sys
 
-import django
-
-sys.path.insert(0, os.path.abspath('..'))
-os.environ['DJANGO_SETTINGS_MODULE'] = 'tests.test_settings'
-django.setup()
-
 sys.path.insert(0, os.path.abspath('../xml_utils'))
 sys.path.insert(1, os.path.abspath('../tests'))
 

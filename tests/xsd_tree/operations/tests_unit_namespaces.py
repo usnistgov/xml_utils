@@ -1,18 +1,21 @@
-"""Unit tests for namespaces operations
+""" Unit tests for namespaces operations
 """
 from unittest import TestCase
 
 from lxml import etree
 
-from xml_utils.xsd_tree.operations.namespaces import get_namespaces, get_default_prefix, get_target_namespace
+from xml_utils.xsd_tree.operations.namespaces import get_namespaces, get_default_prefix, \
+    get_target_namespace
 from xml_utils.xsd_tree.xsd_tree import XSDTree
 
 
 class TestGetNamespaces(TestCase):
     def test_get_namespaces_one_namespace_prefix_is_key(self):
-        xsd_string = "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'></xs:schema>"
+        xsd_string = """
+            <xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'></xs:schema>
+        """
         namespaces = get_namespaces(xsd_string)
-        self.assertTrue('xs' in list(namespaces.keys()))
+        self.assertTrue("xs" in list(namespaces.keys()))
 
     def test_get_namespaces_one_namespace_namespace_is_value(self):
         xsd_string = "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'></xs:schema>"
@@ -20,7 +23,12 @@ class TestGetNamespaces(TestCase):
         self.assertTrue(namespaces['xs'] == 'http://www.w3.org/2001/XMLSchema')
 
     def test_get_namespaces_two_namespaces(self):
-        xsd_string = "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:test='test'></xs:schema>"
+        xsd_string = """
+            <xs:schema
+                xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+                xmlns:test="test">
+            </xs:schema>
+        """
         namespaces = get_namespaces(xsd_string)
         self.assertTrue('xs' in list(namespaces.keys()) and 'test' in list(namespaces.keys()))
 
@@ -60,16 +68,16 @@ class TestGetTargetNamespace(TestCase):
         xsd_string = "<schema></schema>"
         xsd_tree = XSDTree.build_tree(xsd_string)
         namespaces = get_namespaces(xsd_string)
-        self.assertEquals((None, ''), get_target_namespace(xsd_tree, namespaces))
+        self.assertEqual((None, ''), get_target_namespace(xsd_tree, namespaces))
 
     def test_target_namespace_no_prefix_returns_target_namespace_only(self):
         xsd_string = "<schema targetNamespace='namespace'></schema>"
         xsd_tree = XSDTree.build_tree(xsd_string)
         namespaces = get_namespaces(xsd_string)
-        self.assertEquals(('namespace', ''), get_target_namespace(xsd_tree, namespaces))
+        self.assertEqual(('namespace', ''), get_target_namespace(xsd_tree, namespaces))
 
     def test_target_namespace_with_prefix_returns_target_namespace_and_prefix(self):
         xsd_string = "<schema targetNamespace='namespace' xmlns:ns='namespace'></schema>"
         xsd_tree = XSDTree.build_tree(xsd_string)
         namespaces = get_namespaces(xsd_string)
-        self.assertEquals(('namespace', 'ns'), get_target_namespace(xsd_tree, namespaces))
+        self.assertEqual(('namespace', 'ns'), get_target_namespace(xsd_tree, namespaces))
