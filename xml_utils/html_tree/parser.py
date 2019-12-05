@@ -32,7 +32,7 @@ def safe_html(html_text):
 
     Returns:
     """
-    return html.tostring(html.fragment_fromstring(html_text, create_parent='div'))
+    return html.tostring(html.fragment_fromstring(html_text, create_parent='div'), encoding='unicode')
 
 
 def from_string(html_content, base_url=None, parser=None, **kw):
