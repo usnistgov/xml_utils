@@ -137,10 +137,16 @@ class XSDTree(object):
 
         """
         try:
-            return xml_tree.find("//xsl:output",
-                                 namespaces={'xsl': xml_constants.XSL_NAMESPACE}).attrib['method']
-        except Exception as e:
-            raise exceptions.XMLError(str(e))
+            return xml_tree.find("//xsl:output",namespaces={'xsl': xml_constants.XSL_NAMESPACE}).attrib['method']
+        except:
+            #return default output format
+            method = "xml"
+            children = xml_tree.getroot().getchildren()
+            if  children:
+                if children[0].tag == 'html':
+                     method = "html"
+
+            return  method
 
     @staticmethod
     def create_element(tag, attrib=None, nsmap=None, **extra):
