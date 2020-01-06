@@ -1,5 +1,5 @@
 future==0.17.1
-Django==2.2.9
+Django==3.0.2
 lxml==4.1.1
 mock==2.0.0
 pyzmq==18.1.0
