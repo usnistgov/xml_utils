@@ -2,6 +2,6 @@ future==0.17.1
 lxml==4.1.1
 mock==2.0.0
 pyzmq==18.1.0
-six==1.12.0
+six==1.14.0
 # xerces_wrapper==0.1.0
 xmltodict==0.11.0
