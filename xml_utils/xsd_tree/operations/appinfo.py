@@ -50,12 +50,16 @@ def _get_appinfo_element(element, element_name, namespace):
 
     """
     element_name_any_namespace = "{*}" + element_name
-    appinfo_elements = element.findall("./{0}annotation/{0}appinfo/{1}".format(namespace, element_name_any_namespace))
+    appinfo_elements = element.findall(
+        "./{0}annotation/{0}appinfo/{1}".format(namespace, element_name_any_namespace)
+    )
 
     if len(appinfo_elements) == 1:
         return appinfo_elements[0]
     elif len(appinfo_elements) > 1:
-        raise XMLError("{} appinfo found multiple times in the same element".format(element_name))
+        raise XMLError(
+            "{} appinfo found multiple times in the same element".format(element_name)
+        )
     elif len(appinfo_elements) == 0:
         return None
 
@@ -104,15 +108,21 @@ def add_appinfo_child_to_element(element, appinfo_name, value):
 
     """
     # Get the appinfo element
-    appinfo_element = _get_appinfo_element(element, appinfo_name, xml_utils_constants.LXML_SCHEMA_NAMESPACE)
+    appinfo_element = _get_appinfo_element(
+        element, appinfo_name, xml_utils_constants.LXML_SCHEMA_NAMESPACE
+    )
 
     # if appinfo is absent, creates it
     if appinfo_element is None:
         # get annotation tag
-        annotation = _get_or_create_element(element, "annotation", xml_utils_constants.LXML_SCHEMA_NAMESPACE)
+        annotation = _get_or_create_element(
+            element, "annotation", xml_utils_constants.LXML_SCHEMA_NAMESPACE
+        )
 
         # get appinfo tag
-        appinfo = _get_or_create_element(annotation, "appinfo", xml_utils_constants.LXML_SCHEMA_NAMESPACE)
+        appinfo = _get_or_create_element(
+            annotation, "appinfo", xml_utils_constants.LXML_SCHEMA_NAMESPACE
+        )
 
         # get attribute tag
         appinfo_element = _get_or_create_element(appinfo, appinfo_name)
@@ -132,7 +142,9 @@ def delete_appinfo_child_from_element(element, appinfo_name):
 
     """
     # Get the appinfo element
-    appinfo_element = _get_appinfo_element(element, appinfo_name, xml_utils_constants.LXML_SCHEMA_NAMESPACE)
+    appinfo_element = _get_appinfo_element(
+        element, appinfo_name, xml_utils_constants.LXML_SCHEMA_NAMESPACE
+    )
 
     # if appinfo is present, deletes it
     if appinfo_element is not None:

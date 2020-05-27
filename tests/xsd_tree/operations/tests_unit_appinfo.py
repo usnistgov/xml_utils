@@ -5,8 +5,10 @@ from unittest import TestCase
 from lxml import etree
 
 from xml_utils.commons.exceptions import XMLError
-from xml_utils.xsd_tree.operations.appinfo import add_appinfo_element, \
-    delete_appinfo_element
+from xml_utils.xsd_tree.operations.appinfo import (
+    add_appinfo_element,
+    delete_appinfo_element,
+)
 from xml_utils.xsd_tree.xsd_tree import XSDTree
 
 
@@ -195,9 +197,7 @@ class TestAddAppInfoElement(TestCase):
         """
         xpath = "xs:element"
 
-        updated_xsd_string = add_appinfo_element(
-            xsd_string, xpath, "attribute", "new"
-        )
+        updated_xsd_string = add_appinfo_element(xsd_string, xpath, "attribute", "new")
 
         expected_string = """
             <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
@@ -298,9 +298,7 @@ class TestAddAppInfoElement(TestCase):
         """
         xpath = "xs:element"
 
-        updated_xsd_string = add_appinfo_element(
-            xsd_string, xpath, "attribute", "new"
-        )
+        updated_xsd_string = add_appinfo_element(xsd_string, xpath, "attribute", "new")
 
         expected_string = """
             <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
@@ -457,9 +455,7 @@ class TestDeleteAppInfoElement(TestCase):
         """
         xpath = "xs:element"
 
-        updated_xsd_string = delete_appinfo_element(
-            xsd_string, xpath, "attribute"
-        )
+        updated_xsd_string = delete_appinfo_element(xsd_string, xpath, "attribute")
 
         expected_string = """
             <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">

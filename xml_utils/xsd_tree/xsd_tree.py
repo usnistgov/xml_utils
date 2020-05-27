@@ -24,7 +24,7 @@ class XSDTree(object):
 
         """
         try:
-            xml_string = BytesIO(xml_string.encode('utf-8'))
+            xml_string = BytesIO(xml_string.encode("utf-8"))
         except Exception:
             xml_string = BytesIO(xml_string)
 
@@ -42,7 +42,7 @@ class XSDTree(object):
 
         """
         try:
-            return etree.tostring(xml_tree, pretty_print=pretty, encoding='unicode')
+            return etree.tostring(xml_tree, pretty_print=pretty, encoding="unicode")
         except Exception as e:
             raise exceptions.XMLError(str(e))
 
@@ -59,7 +59,7 @@ class XSDTree(object):
         try:
             return etree.XSLT(xml_parsed)
         except:
-            return etree.XSLT(xml_parsed.encode('utf-8'))
+            return etree.XSLT(xml_parsed.encode("utf-8"))
 
     @staticmethod
     def transform_to_xml(xml_string):
@@ -74,7 +74,7 @@ class XSDTree(object):
         try:
             return etree.XML(xml_string)
         except:
-            return etree.XML(xml_string.encode('utf-8'))
+            return etree.XML(xml_string.encode("utf-8"))
 
     @staticmethod
     def fromstring(xml_string, parser=None):
@@ -121,7 +121,7 @@ class XSDTree(object):
 
         """
         try:
-            xml_file = BytesIO(xml_string.encode('utf-8'))
+            xml_file = BytesIO(xml_string.encode("utf-8"))
             return etree.iterparse(xml_file, events)
         except Exception as e:
             raise exceptions.XMLError(str(e))
@@ -137,16 +137,18 @@ class XSDTree(object):
 
         """
         try:
-            return xml_tree.find("//xsl:output",namespaces={'xsl': xml_constants.XSL_NAMESPACE}).attrib['method']
+            return xml_tree.find(
+                "//xsl:output", namespaces={"xsl": xml_constants.XSL_NAMESPACE}
+            ).attrib["method"]
         except:
-            #return default output format
+            # return default output format
             method = "xml"
             children = xml_tree.getroot().getchildren()
-            if  children:
-                if children[0].tag == 'html':
-                     method = "html"
+            if children:
+                if children[0].tag == "html":
+                    method = "html"
 
-            return  method
+            return method
 
     @staticmethod
     def create_element(tag, attrib=None, nsmap=None, **extra):

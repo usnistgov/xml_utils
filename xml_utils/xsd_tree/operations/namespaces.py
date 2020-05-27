@@ -16,7 +16,7 @@ def get_namespaces(xsd_string):
     # events to look for during iterparse
     events = "start", "start-ns"
     # initialize namespaces dictionary
-    namespaces = {'xml': xml_utils_constants.XML_NAMESPACE}
+    namespaces = {"xml": xml_utils_constants.XML_NAMESPACE}
     # iterate file namespaces
     for event, elem in XSDTree.iterparse(xsd_string, events):
         if event == "start-ns":
@@ -37,7 +37,7 @@ def get_default_prefix(namespaces):
     Returns:
 
     """
-    default_prefix = ''
+    default_prefix = ""
     for prefix, url in list(namespaces.items()):
         if url == xml_utils_constants.SCHEMA_NAMESPACE:
             default_prefix = prefix
@@ -80,9 +80,13 @@ def get_target_namespace(xsd_tree, namespaces):
     # get attributes of the root element (schema)
     root_attributes = xsd_tree.getroot().attrib
     # check if a target namespace is present
-    target_namespace = root_attributes['targetNamespace'] if 'targetNamespace' in root_attributes else None
+    target_namespace = (
+        root_attributes["targetNamespace"]
+        if "targetNamespace" in root_attributes
+        else None
+    )
     # set default prefix to empty string
-    target_namespace_prefix = ''
+    target_namespace_prefix = ""
     # if a target namespace is present
     if target_namespace is not None:
         # iterate through namespaces

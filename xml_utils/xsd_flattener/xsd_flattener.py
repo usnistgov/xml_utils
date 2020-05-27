@@ -31,7 +31,9 @@ class XSDFlattener(object, metaclass=ABCMeta):
 
         """
         # builds the parser
-        parser = etree.XMLParser(remove_blank_text=True, remove_comments=True, remove_pis=True)
+        parser = etree.XMLParser(
+            remove_blank_text=True, remove_comments=True, remove_pis=True
+        )
         # sets the parser
         etree.set_default_parser(parser=parser)
 
@@ -81,11 +83,13 @@ class XSDFlattener(object, metaclass=ABCMeta):
             # browse includes
             for include_element in includes:
                 # get the schema location uri
-                uri = include_element.attrib['schemaLocation']
+                uri = include_element.attrib["schemaLocation"]
                 # get the flattened dependency
                 flat_dependency = self.get_flat_dependency(uri)
                 # replace the include by its content
-                XSDFlattener._replace_include_by_content(xml_tree, include_element, flat_dependency)
+                XSDFlattener._replace_include_by_content(
+                    xml_tree, include_element, flat_dependency
+                )
         return XSDTree.tostring(xml_tree)
 
     @staticmethod

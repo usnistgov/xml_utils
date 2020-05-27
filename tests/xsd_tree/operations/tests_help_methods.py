@@ -14,15 +14,15 @@ class TestAdditionalMethods(TestCase):
                 <root><test></test></root>
             </xs:schema>
         """
-        XSDTree.iterparse(xsd_string, ('end',))
+        XSDTree.iterparse(xsd_string, ("end",))
 
     def test_iterparse_method_with_unicode(self):
-        xsd_string = u"""
+        xsd_string = """
             <xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'>
                 <\u0192-root><test></test></\u0192-root>
             </xs:schema>
         """
-        XSDTree.iterparse(xsd_string, ('end',))
+        XSDTree.iterparse(xsd_string, ("end",))
 
     @skip("Exception not raised since py3 migration")
     def test_iterparse_method_without_decoded_symbols(self):
@@ -33,4 +33,4 @@ class TestAdditionalMethods(TestCase):
         """
 
         with self.assertRaises(XMLError):
-            XSDTree.iterparse(xsd_string, ('end',))
+            XSDTree.iterparse(xsd_string, ("end",))

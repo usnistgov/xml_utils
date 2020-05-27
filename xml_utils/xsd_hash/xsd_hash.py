@@ -23,7 +23,9 @@ def get_hash(xml_string):
         str: SHA-1 hash of the XML string
     """
     # Load the required parser
-    hash_parser = etree.XMLParser(remove_blank_text=True, remove_comments=True, remove_pis=True)
+    hash_parser = etree.XMLParser(
+        remove_blank_text=True, remove_comments=True, remove_pis=True
+    )
     etree.set_default_parser(parser=hash_parser)
 
     xml_tree = XSDTree.build_tree(xml_string)

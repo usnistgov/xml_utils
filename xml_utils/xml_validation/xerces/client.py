@@ -9,7 +9,9 @@ import zmq
 logger = logging.getLogger(__name__)
 
 
-def send_message(message, endpoint="tcp://127.0.0.1:5555", timeout=3000, retries=3, context_zmq=7):
+def send_message(
+    message, endpoint="tcp://127.0.0.1:5555", timeout=3000, retries=3, context_zmq=7
+):
     """     Send a message to the Schema validation server
 
     Args:
@@ -50,7 +52,7 @@ def send_message(message, endpoint="tcp://127.0.0.1:5555", timeout=3000, retries
                     break
                 else:
                     logger.info("Answer: %s" % reply)
-                    if reply == 'ok':
+                    if reply == "ok":
                         reply = None
                     retries_left = 0
                     expect_reply = False
@@ -62,8 +64,10 @@ def send_message(message, endpoint="tcp://127.0.0.1:5555", timeout=3000, retries
                 poll.unregister(socket)
                 retries_left -= 1
                 if retries_left == 0:
-                    reply = "Error: XML Validation server seems to be offline, please contact " \
-                            "the administrator."
+                    reply = (
+                        "Error: XML Validation server seems to be offline, please contact "
+                        "the administrator."
+                    )
                     break
 
                 logger.info("Reconnecting and resending...")
@@ -76,6 +80,6 @@ def send_message(message, endpoint="tcp://127.0.0.1:5555", timeout=3000, retries
     socket.close()
     context.term()
 
-    if reply == 'ok':
+    if reply == "ok":
         return None
     return reply

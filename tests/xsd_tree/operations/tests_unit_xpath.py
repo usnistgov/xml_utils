@@ -17,8 +17,10 @@ class TestGetElementByXpath(TestCase):
         self.assertTrue(element is not None)
 
     def test_get_element_xpath_matching_element_with_xs_namespace_prefix(self):
-        xsd_string = "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element><xs:complexType>" \
-                     "</xs:complexType></xs:element></xs:schema>"
+        xsd_string = (
+            "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><xs:element><xs:complexType>"
+            "</xs:complexType></xs:element></xs:schema>"
+        )
         xpath = "xs:element/xs:complexType"
         xsd_tree = XSDTree.build_tree(xsd_string)
         namespaces = get_namespaces(xsd_string)
@@ -26,17 +28,23 @@ class TestGetElementByXpath(TestCase):
         self.assertTrue(element is not None)
 
     def test_get_element_xpath_matching_element_with_xsd_namespace_prefix(self):
-        xsd_string = "<xsd:schema xmlns:xsd='http://www.w3.org/2001/XMLSchema'><xsd:element><xsd:complexType>" \
-                     "</xsd:complexType></xsd:element></xsd:schema>"
+        xsd_string = (
+            "<xsd:schema xmlns:xsd='http://www.w3.org/2001/XMLSchema'><xsd:element><xsd:complexType>"
+            "</xsd:complexType></xsd:element></xsd:schema>"
+        )
         xpath = "xsd:element/xsd:complexType"
         xsd_tree = XSDTree.build_tree(xsd_string)
         namespaces = get_namespaces(xsd_string)
         element = get_element_by_xpath(xsd_tree, xpath, namespaces)
         self.assertTrue(element is not None)
 
-    def test_get_element_xpath_not_matching_element_with_different_namespace_prefix(self):
-        xsd_string = "<xsd:schema xmlns:xsd='http://www.w3.org/2001/XMLSchema'><xsd:element><xsd:complexType>" \
-                     "</xsd:complexType></xsd:element></xsd:schema>"
+    def test_get_element_xpath_not_matching_element_with_different_namespace_prefix(
+        self,
+    ):
+        xsd_string = (
+            "<xsd:schema xmlns:xsd='http://www.w3.org/2001/XMLSchema'><xsd:element><xsd:complexType>"
+            "</xsd:complexType></xsd:element></xsd:schema>"
+        )
         xpath = "xs:element/xs:complexType"
         xsd_tree = XSDTree.build_tree(xsd_string)
         namespaces = get_namespaces(xsd_string)
@@ -44,8 +52,10 @@ class TestGetElementByXpath(TestCase):
             get_element_by_xpath(xsd_tree, xpath, namespaces)
 
     def test_get_element_xpath_not_matching_element_without_namespace_prefix(self):
-        xsd_string = "<xsd:schema xmlns:xsd='http://www.w3.org/2001/XMLSchema'><xsd:element><xsd:complexType>" \
-                     "</xsd:complexType></xsd:element></xsd:schema>"
+        xsd_string = (
+            "<xsd:schema xmlns:xsd='http://www.w3.org/2001/XMLSchema'><xsd:element><xsd:complexType>"
+            "</xsd:complexType></xsd:element></xsd:schema>"
+        )
         xpath = "element/complexType"
         xsd_tree = XSDTree.build_tree(xsd_string)
         namespaces = get_namespaces(xsd_string)

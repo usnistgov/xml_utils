@@ -21,7 +21,7 @@ def xerces_validate_xsd(xsd_tree):
 
     """
     xsd_string = _xsd_serialize(xsd_tree)
-    message = {'xsd_string': xsd_string}
+    message = {"xsd_string": xsd_string}
     message = _json_serialize(message)
     return send_message(message)
 
@@ -39,7 +39,7 @@ def xerces_validate_xml(xsd_tree, xml_tree):
     """
     pretty_xml_string = _xsd_serialize(xml_tree, pretty_print=True)
     xsd_string = _xsd_serialize(xsd_tree)
-    message = {'xsd_string': xsd_string, 'xml_string': pretty_xml_string}
+    message = {"xsd_string": xsd_string, "xml_string": pretty_xml_string}
     message = _json_serialize(message)
     return send_message(message)
 

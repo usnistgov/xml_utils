@@ -7,7 +7,7 @@ from xml_utils.commons.exceptions import HTMLError
 from xml_utils.xsd_tree.xsd_tree import XSDTree
 
 
-def parse_html(html_text, parent_tag=''):
+def parse_html(html_text, parent_tag=""):
     """ Try to parse and unparse HTML to verify that is correctly formatted
 
     Params:
@@ -32,7 +32,9 @@ def safe_html(html_text):
 
     Returns:
     """
-    return html.tostring(html.fragment_fromstring(html_text, create_parent='div'), encoding='unicode')
+    return html.tostring(
+        html.fragment_fromstring(html_text, create_parent="div"), encoding="unicode"
+    )
 
 
 def from_string(html_content, base_url=None, parser=None, **kw):
@@ -54,8 +56,15 @@ def from_string(html_content, base_url=None, parser=None, **kw):
     return html.fromstring(html_content, base_url, parser, **kw)
 
 
-def to_string(doc, pretty_print=False, include_meta_content_type=False,
-             encoding=None, method="html", with_tail=True, doctype=None):
+def to_string(
+    doc,
+    pretty_print=False,
+    include_meta_content_type=False,
+    encoding=None,
+    method="html",
+    with_tail=True,
+    doctype=None,
+):
     """Return an HTML string representation of the document.
 
     Parameters:
@@ -69,8 +78,15 @@ def to_string(doc, pretty_print=False, include_meta_content_type=False,
 
     Returns:
     """
-    return html.tostring(doc, pretty_print, include_meta_content_type, encoding, method,
-                         with_tail, doctype)
+    return html.tostring(
+        doc,
+        pretty_print,
+        include_meta_content_type,
+        encoding,
+        method,
+        with_tail,
+        doctype,
+    )
 
 
 def html_diff(old_html, new_html):

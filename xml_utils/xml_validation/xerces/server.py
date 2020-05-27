@@ -41,6 +41,7 @@ def _xerces_validate_xsd(xsd_string):
     """
     if _xerces_exists():
         import xerces_wrapper
+
         logger.debug("XERCES IMPORTED")
         error = xerces_wrapper.validate_xsd(xsd_string)
         logger.debug("SCHEMA validated")
@@ -66,6 +67,7 @@ def _xerces_validate_xml(xsd_string, xml_string):
     """
     if _xerces_exists():
         import xerces_wrapper
+
         logger.debug("XERCES IMPORTED")
         error = xerces_wrapper.validate_xml(xsd_string, xml_string)
         logger.debug("DATA validated")
@@ -82,17 +84,13 @@ def main(argv):
     parser = argparse.ArgumentParser(description="Launch Server Tool")
 
     # add optional arguments
-    parser.add_argument("-e",
-                        "--endpoint",
-                        help="Listening endpoint",
-                        nargs=1,
-                        required=True)
+    parser.add_argument(
+        "-e", "--endpoint", help="Listening endpoint", nargs=1, required=True
+    )
 
-    parser.add_argument("-c",
-                        "--contextzmq",
-                        help="Context zmq",
-                        nargs=1,
-                        required=True)
+    parser.add_argument(
+        "-c", "--contextzmq", help="Context zmq", nargs=1, required=True
+    )
 
     # parse arguments
     args = parser.parse_args()
@@ -171,5 +169,3 @@ def main(argv):
 
 if __name__ == "__main__":
     main(sys.argv[1:])
-
-
