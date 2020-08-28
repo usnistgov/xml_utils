@@ -47,7 +47,7 @@ def get_default_prefix(namespaces):
 
 
 def get_global_namespace(xsd_string):
-    """ Get global namespace used in schema (defined by xmlns=<namespace>)
+    """Get global namespace used in schema (defined by xmlns=<namespace>)
 
     Returns:
 

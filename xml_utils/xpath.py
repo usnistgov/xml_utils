@@ -8,7 +8,7 @@ from xml_utils.commons import exceptions
 
 
 def validate_xpath(xpath):
-    """ Validate a provided xpath.
+    """Validate a provided xpath.
 
     Args:
         xpath:
@@ -23,7 +23,7 @@ def validate_xpath(xpath):
 
 
 def create_tree_from_xpath(xpath, xml_tree, namespaces=None, default_xpath=""):
-    """ Create tree at a given xpath. Recursive function
+    """Create tree at a given xpath. Recursive function
 
     Args:
         xpath:

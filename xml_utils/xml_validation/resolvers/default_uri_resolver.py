@@ -5,11 +5,10 @@ from lxml import etree
 
 
 class DefaultURIResolver(etree.Resolver):
-    """ Default URI Resolver
-    """
+    """Default URI Resolver"""
 
     def resolve(self, url, id, context):
-        """ Resolve URL: returns to lxml default resolver.
+        """Resolve URL: returns to lxml default resolver.
 
         Args:
             url:

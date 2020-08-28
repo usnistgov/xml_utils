@@ -9,11 +9,10 @@ from xml_utils.xsd_tree.xsd_tree import XSDTree
 
 
 class XSDFlattener(object, metaclass=ABCMeta):
-    """ Abstract XSD Flattener class
-    """
+    """Abstract XSD Flattener class"""
 
     def __init__(self, xml_string, download_enabled=True):
-        """ Initializes the flattener
+        """Initializes the flattener
 
         Args:
             xml_string:
@@ -25,7 +24,7 @@ class XSDFlattener(object, metaclass=ABCMeta):
         self.xsd_tree = XSDTree()
 
     def get_flat(self):
-        """ Returns the flattened file
+        """Returns the flattened file
 
         Returns:
 
@@ -68,7 +67,7 @@ class XSDFlattener(object, metaclass=ABCMeta):
             return None
 
     def _replace_all_includes_by_content(self, xml_tree):
-        """ Replace all includes by their content
+        """Replace all includes by their content
 
         Args:
             xml_tree:
@@ -94,7 +93,7 @@ class XSDFlattener(object, metaclass=ABCMeta):
 
     @staticmethod
     def _replace_include_by_content(xml_tree, include_element, dependency_content):
-        """ Replace an include by its content
+        """Replace an include by its content
 
         Args:
             xml_tree:

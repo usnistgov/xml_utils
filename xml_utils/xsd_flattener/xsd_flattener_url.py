@@ -9,11 +9,10 @@ from xml_utils.xsd_flattener.xsd_flattener import XSDFlattener
 
 
 class XSDFlattenerURL(XSDFlattener):
-    """XSD Flattener class getting dependencies by URL
-    """
+    """XSD Flattener class getting dependencies by URL"""
 
     def __init__(self, xml_string, download_enabled=True):
-        """ Initialize the flattener
+        """Initialize the flattener
 
         Args:
             xml_string:
@@ -23,7 +22,7 @@ class XSDFlattenerURL(XSDFlattener):
         self.download_enabled = download_enabled
 
     def get_dependency_content(self, uri):
-        """ Download the content found at the URL
+        """Download the content found at the URL
 
         Args:
             uri:

@@ -12,7 +12,7 @@ from xml_utils.xsd_tree.xsd_tree import XSDTree
 
 
 def get_hash(xml_string):
-    """ Get the hash of an XML String. Removes blank text, comments,
+    """Get the hash of an XML String. Removes blank text, comments,
     processing instructions and annotations from the input. Allows to
     retrieve the same hash for two similar XML string.
 

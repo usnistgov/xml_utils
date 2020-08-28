@@ -10,12 +10,11 @@ import xml_utils.commons.exceptions as exceptions
 
 
 class XSDTree(object):
-    """ XSD tree class
-    """
+    """XSD tree class"""
 
     @staticmethod
     def build_tree(xml_string):
-        """ Returns a lxml etree from an XML string (xml, xsd...)
+        """Returns a lxml etree from an XML string (xml, xsd...)
 
         Args:
             xml_string:
@@ -32,7 +31,7 @@ class XSDTree(object):
 
     @staticmethod
     def tostring(xml_tree, pretty=False):
-        """ Return an XML String from a lxml etree
+        """Return an XML String from a lxml etree
 
         Args:
             xml_tree:
@@ -48,7 +47,7 @@ class XSDTree(object):
 
     @staticmethod
     def transform_to_xslt(xml_parsed):
-        """ Turn an XML document into an XSLT object.
+        """Turn an XML document into an XSLT object.
 
         Args:
             xml_parsed:
@@ -63,7 +62,7 @@ class XSDTree(object):
 
     @staticmethod
     def transform_to_xml(xml_string):
-        """ Turn an XML document into an XML object.
+        """Turn an XML document into an XML object.
 
         Args:
             xml_string:
@@ -78,7 +77,7 @@ class XSDTree(object):
 
     @staticmethod
     def fromstring(xml_string, parser=None):
-        """ Convert a string to an XML tree
+        """Convert a string to an XML tree
 
         Args:
             xml_string:
@@ -94,7 +93,7 @@ class XSDTree(object):
 
     @staticmethod
     def iterfind(xml_string, match):
-        """ Finds all matching sub elements, by tag name or path.
+        """Finds all matching sub elements, by tag name or path.
         Args:
             xml_string: String xml.
             match: Pattern to match
@@ -111,7 +110,7 @@ class XSDTree(object):
 
     @staticmethod
     def iterparse(xml_string, events):
-        """ Returns etree.iterparse
+        """Returns etree.iterparse
 
         Args:
             xml_string:
@@ -128,7 +127,7 @@ class XSDTree(object):
 
     @staticmethod
     def get_extension(xml_tree):
-        """ Returns the extension file from a parsed xml
+        """Returns the extension file from a parsed xml
 
         Args:
             xml_tree: result of build_tree

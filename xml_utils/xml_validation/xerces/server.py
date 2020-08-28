@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 
 
 def _xerces_exists():
-    """ Check if xerces wrapper is installed
+    """Check if xerces wrapper is installed
 
     Returns:
 
@@ -30,7 +30,7 @@ def _xerces_exists():
 
 
 def _xerces_validate_xsd(xsd_string):
-    """ Validate schema using Xerces
+    """Validate schema using Xerces
 
     Args:
         xsd_string:
@@ -55,7 +55,7 @@ def _xerces_validate_xsd(xsd_string):
 
 
 def _xerces_validate_xml(xsd_string, xml_string):
-    """ Validate document using Xerces
+    """Validate document using Xerces
 
     Args:
         xsd_string:

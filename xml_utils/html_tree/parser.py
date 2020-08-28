@@ -8,7 +8,7 @@ from xml_utils.xsd_tree.xsd_tree import XSDTree
 
 
 def parse_html(html_text, parent_tag=""):
-    """ Try to parse and unparse HTML to verify that is correctly formatted
+    """Try to parse and unparse HTML to verify that is correctly formatted
 
     Params:
         html_text:
@@ -25,7 +25,7 @@ def parse_html(html_text, parent_tag=""):
 
 
 def safe_html(html_text):
-    """ Returns safe HTML from input
+    """Returns safe HTML from input
 
     Parameters:
         html_text:
@@ -90,7 +90,7 @@ def to_string(
 
 
 def html_diff(old_html, new_html):
-    """ Do a diff of the old and new document.  The documents are HTML
+    """Do a diff of the old and new document.  The documents are HTML
     *fragments* (str/UTF8 or unicode), they are not complete documents
     (i.e., no <html> tag).
     """

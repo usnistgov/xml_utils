@@ -11,7 +11,7 @@ from .xerces.client import send_message
 
 
 def xerces_validate_xsd(xsd_tree):
-    """  Send XML Schema to server to be validated
+    """Send XML Schema to server to be validated
 
     Args:
         xsd_tree:
@@ -27,7 +27,7 @@ def xerces_validate_xsd(xsd_tree):
 
 
 def xerces_validate_xml(xsd_tree, xml_tree):
-    """ Send XML Data and XML Schema to server to validate data against the schema
+    """Send XML Data and XML Schema to server to validate data against the schema
 
     Args:
         xsd_tree:
@@ -45,7 +45,7 @@ def xerces_validate_xml(xsd_tree, xml_tree):
 
 
 def lxml_validate_xsd(xsd_tree, uri_resolver=None):
-    """ Validate schema using LXML
+    """Validate schema using LXML
 
     Args:
         xsd_tree:
@@ -64,7 +64,7 @@ def lxml_validate_xsd(xsd_tree, uri_resolver=None):
 
 
 def lxml_validate_xml(xsd_tree, xml_tree, uri_resolver=None):
-    """ Validate document using LXML
+    """Validate document using LXML
 
     Args:
         xsd_tree:
@@ -85,7 +85,7 @@ def lxml_validate_xml(xsd_tree, xml_tree, uri_resolver=None):
 
 
 def _xsd_serialize(xsd_tree, pretty_print=False):
-    """ Serialize xsd document
+    """Serialize xsd document
 
     Args:
         xsd_tree:
@@ -103,7 +103,7 @@ def _xsd_serialize(xsd_tree, pretty_print=False):
 
 
 def _json_serialize(message):
-    """ Serialize json document
+    """Serialize json document
 
     Args:
         message:
@@ -120,7 +120,7 @@ def _json_serialize(message):
 
 
 def _build_etree_schema(xsd_tree, uri_resolver=None):
-    """ Build an lxml etree XMLSchema
+    """Build an lxml etree XMLSchema
 
     Args:
         xsd_tree:
