@@ -99,3 +99,23 @@ def get_xsd_floating_numbers(namespace_prefix=""):
         "{0}double".format(namespace_prefix),
         "{0}decimal".format(namespace_prefix),
     ]
+
+
+def get_xsd_gregorian_types(namespace_prefix=""):
+    """Returns a list of formatted xsd Gregorian date types
+
+    Args:
+        namespace_prefix:
+
+    Returns:
+
+    """
+    if namespace_prefix != "":
+        namespace_prefix += ":"
+    return [
+        "{0}gYearMonth".format(namespace_prefix),
+        "{0}gYear".format(namespace_prefix),
+        "{0}gMonthDay".format(namespace_prefix),
+        "{0}gDay".format(namespace_prefix),
+        "{0}gMonth".format(namespace_prefix),
+    ]
