@@ -8,8 +8,6 @@ import logging
 import sys
 import time
 
-import zmq
-
 logger = logging.getLogger(__name__)
 
 
@@ -107,64 +105,69 @@ def main(argv):
         context_zmq = 7
 
     # socket configuration
-    context = zmq.Context(context_zmq)
-    socket = context.socket(zmq.REP)
-    socket.bind(endpoint)
+    try:
+        import zmq
 
-    mutex = True
-    while True:
-        if mutex:
-            #  Wait for next request from client
-            message = socket.recv()
-            logger.debug("Received request")
+        context = zmq.Context(context_zmq)
+        socket = context.socket(zmq.REP)
+        socket.bind(endpoint)
 
-            try:
-                message = json.loads(message)
+        mutex = True
+        while True:
+            if mutex:
+                #  Wait for next request from client
+                message = socket.recv()
+                logger.debug("Received request")
 
-                # validate data against schema
-                if "xml_string" in message:
-                    logger.debug("VALIDATE XML")
-                    mutex = False
-                    try:
-                        xsd_string = message["xsd_string"].encode("utf-8")
-                    except UnicodeEncodeError:
-                        xsd_string = message["xsd_string"]
+                try:
+                    message = json.loads(message)
 
-                    try:
-                        xml_string = message["xml_string"].encode("utf-8")
-                    except UnicodeEncodeError:
-                        xml_string = message["xml_string"]
+                    # validate data against schema
+                    if "xml_string" in message:
+                        logger.debug("VALIDATE XML")
+                        mutex = False
+                        try:
+                            xsd_string = message["xsd_string"].encode("utf-8")
+                        except UnicodeEncodeError:
+                            xsd_string = message["xsd_string"]
 
-                    error = _xerces_validate_xml(xsd_string, xml_string)
+                        try:
+                            xml_string = message["xml_string"].encode("utf-8")
+                        except UnicodeEncodeError:
+                            xml_string = message["xml_string"]
 
-                    if error is None:
-                        error = "ok"
+                        error = _xerces_validate_xml(xsd_string, xml_string)
 
-                    response = error
-                else:
-                    logger.debug("VALIDATE XSD")
-                    mutex = False
-                    try:
-                        xsd_string = message["xsd_string"].encode("utf-8")
-                    except UnicodeEncodeError:
-                        xsd_string = message["xsd_string"]
+                        if error is None:
+                            error = "ok"
 
-                    error = _xerces_validate_xsd(xsd_string)
+                        response = error
+                    else:
+                        logger.debug("VALIDATE XSD")
+                        mutex = False
+                        try:
+                            xsd_string = message["xsd_string"].encode("utf-8")
+                        except UnicodeEncodeError:
+                            xsd_string = message["xsd_string"]
 
-                    if error is None:
-                        error = "ok"
+                        error = _xerces_validate_xsd(xsd_string)
 
-                    response = error
+                        if error is None:
+                            error = "ok"
 
-                logger.debug(response)
+                        response = error
 
-                socket.send(str(response))
-                mutex = True
-                logger.debug("Sent response")
-            except Exception as e:
-                logger.error(str(e))
+                    logger.debug(response)
 
-        time.sleep(1)
+                    socket.send(str(response))
+                    mutex = True
+                    logger.debug("Sent response")
+                except Exception as e:
+                    logger.error(str(e))
+
+            time.sleep(1)
+    except ImportError:
+        logger.error("pyzmq is not installed.")
 
 
 if __name__ == "__main__":

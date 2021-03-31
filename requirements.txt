@@ -1,7 +1,5 @@
-future==0.17.1
+future==0.18.2
 lxml==4.6.2
 mock==2.0.0
-pyzmq==18.1.0
-six==1.14.0
-# xerces_wrapper==0.1.0
-xmltodict==0.11.0
+six==1.15.0
+xmltodict==0.12.0

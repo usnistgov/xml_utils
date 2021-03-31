@@ -32,4 +32,5 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     install_requires=required,
+    extras_require={"Xerces": ["pyzmq==18.1.0", "xerces_wrapper==0.1.0"]},
 )

@@ -4,8 +4,6 @@ from __future__ import print_function
 
 import logging
 
-import zmq
-
 logger = logging.getLogger(__name__)
 
 
@@ -24,62 +22,67 @@ def send_message(
     Returns:
 
     """
-    context = zmq.Context(context_zmq)
+    try:
+        import zmq
 
-    logger.debug("Connecting to server...")
-    socket = context.socket(zmq.REQ)
-    socket.connect(endpoint)
+        context = zmq.Context(context_zmq)
 
-    poll = zmq.Poller()
-    poll.register(socket, zmq.POLLIN)
+        logger.debug("Connecting to server...")
+        socket = context.socket(zmq.REQ)
+        socket.connect(endpoint)
 
-    retries_left = retries
-    request = 0
-    reply = ""
+        poll = zmq.Poller()
+        poll.register(socket, zmq.POLLIN)
 
-    while retries_left:
-        request += 1
+        retries_left = retries
+        request = 0
+        reply = ""
 
-        logger.info("Sending request %s..." % request)
-        socket.send(message)
+        while retries_left:
+            request += 1
 
-        expect_reply = True
-        while expect_reply:
-            socks = dict(poll.poll(timeout))
-            if socks.get(socket) == zmq.POLLIN:
-                reply = socket.recv()
-                if not reply:
-                    break
+            logger.info("Sending request %s..." % request)
+            socket.send(message)
+
+            expect_reply = True
+            while expect_reply:
+                socks = dict(poll.poll(timeout))
+                if socks.get(socket) == zmq.POLLIN:
+                    reply = socket.recv()
+                    if not reply:
+                        break
+                    else:
+                        logger.info("Answer: %s" % reply)
+                        if reply == "ok":
+                            reply = None
+                        retries_left = 0
+                        expect_reply = False
                 else:
-                    logger.info("Answer: %s" % reply)
-                    if reply == "ok":
-                        reply = None
-                    retries_left = 0
-                    expect_reply = False
-            else:
-                logger.warning("No response from server, retrying...")
-                # Socket is confused. Close and remove it.
-                socket.setsockopt(zmq.LINGER, 0)
-                socket.close()
-                poll.unregister(socket)
-                retries_left -= 1
-                if retries_left == 0:
-                    reply = (
-                        "Error: XML Validation server seems to be offline, please contact "
-                        "the administrator."
-                    )
-                    break
+                    logger.warning("No response from server, retrying...")
+                    # Socket is confused. Close and remove it.
+                    socket.setsockopt(zmq.LINGER, 0)
+                    socket.close()
+                    poll.unregister(socket)
+                    retries_left -= 1
+                    if retries_left == 0:
+                        reply = (
+                            "Error: XML Validation server seems to be offline, please contact "
+                            "the administrator."
+                        )
+                        break
 
-                logger.info("Reconnecting and resending...")
-                # Create new connection
-                socket = context.socket(zmq.REQ)
-                socket.connect(endpoint)
-                poll.register(socket, zmq.POLLIN)
-                socket.send(message)
+                    logger.info("Reconnecting and resending...")
+                    # Create new connection
+                    socket = context.socket(zmq.REQ)
+                    socket.connect(endpoint)
+                    poll.register(socket, zmq.POLLIN)
+                    socket.send(message)
 
-    socket.close()
-    context.term()
+        socket.close()
+        context.term()
 
-    if reply == "ok":
-        return None
-    return reply
+        if reply == "ok":
+            return None
+        return reply
+    except ImportError:
+        logger.error("pyzmq is not installed.")
