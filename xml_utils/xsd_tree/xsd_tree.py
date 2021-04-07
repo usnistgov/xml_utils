@@ -3,7 +3,7 @@
 from io import BytesIO
 
 import lxml.etree as etree
-from lxml.etree import Element, SubElement
+from lxml.etree import Element, SubElement, XMLParser
 
 import xml_utils.commons.constants as xml_constants
 import xml_utils.commons.exceptions as exceptions
@@ -13,11 +13,12 @@ class XSDTree(object):
     """XSD tree class"""
 
     @staticmethod
-    def build_tree(xml_string):
+    def build_tree(xml_string, parser=None):
         """Returns a lxml etree from an XML string (xml, xsd...)
 
         Args:
             xml_string:
+            parser:
 
         Returns:
 
@@ -26,8 +27,9 @@ class XSDTree(object):
             xml_string = BytesIO(xml_string.encode("utf-8"))
         except Exception:
             xml_string = BytesIO(xml_string)
-
-        return etree.parse(xml_string)
+        if not parser:
+            parser = XMLParser(remove_blank_text=True)
+        return etree.parse(xml_string, parser=parser)
 
     @staticmethod
     def tostring(xml_tree, pretty=False):
@@ -61,19 +63,22 @@ class XSDTree(object):
             return etree.XSLT(xml_parsed.encode("utf-8"))
 
     @staticmethod
-    def transform_to_xml(xml_string):
+    def transform_to_xml(xml_string, parser=None):
         """Turn an XML document into an XML object.
 
         Args:
             xml_string:
+            parser:
 
         Returns:
 
         """
+        if not parser:
+            parser = XMLParser(remove_blank_text=True)
         try:
-            return etree.XML(xml_string)
+            return etree.XML(xml_string, parser=parser)
         except:
-            return etree.XML(xml_string.encode("utf-8"))
+            return etree.XML(xml_string.encode("utf-8"), parser=parser)
 
     @staticmethod
     def fromstring(xml_string, parser=None):
@@ -86,6 +91,8 @@ class XSDTree(object):
         Returns:
 
         """
+        if not parser:
+            parser = XMLParser(remove_blank_text=True)
         try:
             return etree.fromstring(xml_string, parser=parser)
         except Exception as e:

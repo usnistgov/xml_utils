@@ -33,11 +33,9 @@ class XSDFlattener(object, metaclass=ABCMeta):
         parser = etree.XMLParser(
             remove_blank_text=True, remove_comments=True, remove_pis=True
         )
-        # sets the parser
-        etree.set_default_parser(parser=parser)
 
         # parse the XML String removing blanks, comments, processing instructions
-        xml_tree = XSDTree.build_tree(self.xml_string)
+        xml_tree = XSDTree.build_tree(self.xml_string, parser=parser)
 
         # replace the includes by their content
         return self._replace_all_includes_by_content(xml_tree)
