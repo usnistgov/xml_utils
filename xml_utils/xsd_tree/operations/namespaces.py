@@ -21,7 +21,7 @@ def get_namespaces(xsd_string):
     for event, elem in XSDTree.iterparse(xsd_string, events):
         if event == "start-ns":
             if len(elem[0]) > 0 and len(elem[1]) > 0:
-                namespaces[elem[0]] = "%s" % elem[1]
+                namespaces[elem[0]] = f"{elem[1]}"
         elif event == "start":
             break
 

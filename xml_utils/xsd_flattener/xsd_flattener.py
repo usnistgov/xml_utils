@@ -4,11 +4,11 @@ from abc import ABCMeta, abstractmethod
 
 import lxml.etree as etree
 
-import xml_utils.commons.constants as constants
+from xml_utils.commons import constants
 from xml_utils.xsd_tree.xsd_tree import XSDTree
 
 
-class XSDFlattener(object, metaclass=ABCMeta):
+class XSDFlattener(metaclass=ABCMeta):
     """Abstract XSD Flattener class"""
 
     def __init__(self, xml_string, download_enabled=True):
@@ -51,16 +51,17 @@ class XSDFlattener(object, metaclass=ABCMeta):
         """
         try:
             # if the same uri has not already been added to the main tree
-            if uri not in self.dependencies:
-                self.dependencies.append(uri)
-                # get the content of the dependency
-                dependency_content = self.get_dependency_content(uri)
-                # build the tree
-                xml_tree = XSDTree.build_tree(dependency_content)
-                # replace the includes by their content
-                return self._replace_all_includes_by_content(xml_tree)
-            else:
+            if uri in self.dependencies:
                 return None
+
+            self.dependencies.append(uri)
+            # get the content of the dependency
+            dependency_content = self.get_dependency_content(uri)
+            # build the tree
+            xml_tree = XSDTree.build_tree(dependency_content)
+            # replace the includes by their content
+            return self._replace_all_includes_by_content(xml_tree)
+
         except:
             return None
 
@@ -74,7 +75,7 @@ class XSDFlattener(object, metaclass=ABCMeta):
 
         """
         # get the includes
-        includes = xml_tree.findall("{}include".format(constants.LXML_SCHEMA_NAMESPACE))
+        includes = xml_tree.findall(f"{constants.LXML_SCHEMA_NAMESPACE}include")
         # check if it has includes
         if len(includes) > 0:
             # browse includes

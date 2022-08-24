@@ -51,16 +51,16 @@ def _get_appinfo_element(element, element_name, namespace):
     """
     element_name_any_namespace = "{*}" + element_name
     appinfo_elements = element.findall(
-        "./{0}annotation/{0}appinfo/{1}".format(namespace, element_name_any_namespace)
+        f"./{namespace}annotation/{namespace}appinfo/{element_name_any_namespace}"
     )
 
     if len(appinfo_elements) == 1:
         return appinfo_elements[0]
-    elif len(appinfo_elements) > 1:
+    if len(appinfo_elements) > 1:
         raise XMLError(
-            "{} appinfo found multiple times in the same element".format(element_name)
+            f"{element_name} appinfo found multiple times in the same element"
         )
-    elif len(appinfo_elements) == 0:
+    if len(appinfo_elements) == 0:
         return None
 
 
@@ -85,7 +85,7 @@ def _update_appinfo_element(xsd_string, xpath, appinfo_name, value=None):
 
     if value is not None:
         # If a value is provided, create or update the appinfo
-        add_appinfo_child_to_element(element, appinfo_name, value)
+        add_app_infochild_to_element(element, appinfo_name, value)
     else:
         # value is None, deletes the appinfo if present
         delete_appinfo_child_from_element(element, appinfo_name)
@@ -96,7 +96,7 @@ def _update_appinfo_element(xsd_string, xpath, appinfo_name, value=None):
     return updated_xsd_string
 
 
-def add_appinfo_child_to_element(element, appinfo_name, value):
+def add_app_infochild_to_element(element, appinfo_name, value):
     """Adds an appinfo child to an etree element
 
     Args:
@@ -162,10 +162,10 @@ def _get_or_create_element(parent, element_tag, namespace=""):
     Returns:
 
     """
-    element = parent.find("./{0}{1}".format(namespace, element_tag))
+    element = parent.find(f"./{namespace}{element_tag}")
     if element is None:
         # create element if absent
-        element = etree.Element("{0}{1}".format(namespace, element_tag))
+        element = etree.Element(f"{namespace}{element_tag}")
         # insert element
         parent.insert(0, element)
 

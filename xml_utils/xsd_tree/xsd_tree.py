@@ -2,14 +2,13 @@
 """
 from io import BytesIO
 
-import lxml.etree as etree
-from lxml.etree import Element, SubElement, XMLParser
+from lxml import etree
 
 import xml_utils.commons.constants as xml_constants
 import xml_utils.commons.exceptions as exceptions
 
 
-class XSDTree(object):
+class XSDTree:
     """XSD tree class"""
 
     @staticmethod
@@ -28,7 +27,7 @@ class XSDTree(object):
         except Exception:
             xml_string = BytesIO(xml_string)
         if not parser:
-            parser = XMLParser(remove_blank_text=True)
+            parser = etree.XMLParser(remove_blank_text=True)
         return etree.parse(xml_string, parser=parser)
 
     @staticmethod
@@ -44,8 +43,8 @@ class XSDTree(object):
         """
         try:
             return etree.tostring(xml_tree, pretty_print=pretty, encoding="unicode")
-        except Exception as e:
-            raise exceptions.XMLError(str(e))
+        except Exception as exception:
+            raise exceptions.XMLError(str(exception))
 
     @staticmethod
     def transform_to_xslt(xml_parsed):
@@ -74,7 +73,7 @@ class XSDTree(object):
 
         """
         if not parser:
-            parser = XMLParser(remove_blank_text=True)
+            parser = etree.XMLParser(remove_blank_text=True)
         try:
             return etree.XML(xml_string, parser=parser)
         except:
@@ -92,11 +91,11 @@ class XSDTree(object):
 
         """
         if not parser:
-            parser = XMLParser(remove_blank_text=True)
+            parser = etree.XMLParser(remove_blank_text=True)
         try:
             return etree.fromstring(xml_string, parser=parser)
-        except Exception as e:
-            raise exceptions.XMLError(str(e))
+        except Exception as exception:
+            raise exceptions.XMLError(str(exception))
 
     @staticmethod
     def iterfind(xml_string, match):
@@ -112,8 +111,8 @@ class XSDTree(object):
         try:
             xml_tree = XSDTree.build_tree(xml_string)
             return xml_tree.iterfind(match)
-        except Exception as e:
-            raise exceptions.XMLError(str(e))
+        except Exception as exception:
+            raise exceptions.XMLError(str(exception))
 
     @staticmethod
     def iterparse(xml_string, events):
@@ -129,8 +128,8 @@ class XSDTree(object):
         try:
             xml_file = BytesIO(xml_string.encode("utf-8"))
             return etree.iterparse(xml_file, events)
-        except Exception as e:
-            raise exceptions.XMLError(str(e))
+        except Exception as exception:
+            raise exceptions.XMLError(str(exception))
 
     @staticmethod
     def get_extension(xml_tree):
@@ -169,7 +168,7 @@ class XSDTree(object):
 
         Returns:
         """
-        return Element(tag, attrib, nsmap, **extra)
+        return etree.Element(tag, attrib, nsmap, **extra)
 
     @staticmethod
     def create_sub_element(parent, tag, attrib=None, nsmap=None, **extra):
@@ -185,4 +184,4 @@ class XSDTree(object):
 
         Returns:
         """
-        return SubElement(parent, tag, attrib, nsmap, **extra)
+        return etree.SubElement(parent, tag, attrib, nsmap, **extra)

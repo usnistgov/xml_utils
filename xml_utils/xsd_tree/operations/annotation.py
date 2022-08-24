@@ -14,7 +14,7 @@ def remove_annotations(xsd_tree):
     """
     # find all annotations
     annotations = xsd_tree.findall(
-        ".//{}annotation".format(xml_utils_constants.LXML_SCHEMA_NAMESPACE)
+        f".//{xml_utils_constants.LXML_SCHEMA_NAMESPACE}annotation"
     )
     for annotation in annotations:
         annotation.getparent().remove(annotation)
