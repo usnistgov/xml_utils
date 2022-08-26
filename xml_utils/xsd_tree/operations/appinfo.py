@@ -85,7 +85,7 @@ def _update_appinfo_element(xsd_string, xpath, appinfo_name, value=None):
 
     if value is not None:
         # If a value is provided, create or update the appinfo
-        add_app_infochild_to_element(element, appinfo_name, value)
+        add_appinfo_child_to_element(element, appinfo_name, value)
     else:
         # value is None, deletes the appinfo if present
         delete_appinfo_child_from_element(element, appinfo_name)
@@ -96,7 +96,7 @@ def _update_appinfo_element(xsd_string, xpath, appinfo_name, value=None):
     return updated_xsd_string
 
 
-def add_app_infochild_to_element(element, appinfo_name, value):
+def add_appinfo_child_to_element(element, appinfo_name, value):
     """Adds an appinfo child to an etree element
 
     Args:
