@@ -1,3 +1,6 @@
+""" tests unit
+"""
+
 from os.path import join, dirname
 from unittest import TestCase
 
@@ -9,16 +12,22 @@ RESOURCES_PATH = join(dirname(__file__), "data")
 
 
 class TestXSDFlattener(TestCase):
+    """Test XSD Flattener"""
+
     def test_no_include_returns_same_content(self):
+        """test_no_include_returns_same_content"""
+
         xml_string = '<schema xmlns="http://www.w3.org/2001/XMLSchema"/>'
         flattener = XSDFlattenerURL(xml_string)
         flat_string = flattener.get_flat()
-        self.assertEquals(xml_string, flat_string)
+        self.assertEqual(xml_string, flat_string)
 
     @patch(
         "xml_utils.xsd_flattener.xsd_flattener_url.XSDFlattenerURL.get_dependency_content"
     )
     def test_one_include_returns_flat_content(self, mock_get_dependency_content):
+        """test_one_include_returns_flat_content"""
+
         xml_string = (
             '<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">'
             '<xs:include schemaLocation="test.xsd"/></xs:schema>'
@@ -38,6 +47,8 @@ class TestXSDFlattener(TestCase):
         "xml_utils.xsd_flattener.xsd_flattener_url.XSDFlattenerURL.get_dependency_content"
     )
     def test_one_include_removes_include(self, mock_get_dependency_content):
+        """test_one_include_removes_include"""
+
         xml_string = (
             '<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">'
             '<xs:include schemaLocation="test.xsd"/></xs:schema>'
@@ -59,6 +70,8 @@ class TestXSDFlattener(TestCase):
     def test_two_identical_includes_returns_flat_content(
         self, mock_get_dependency_content
     ):
+        """test_two_identical_includes_returns_flat_content"""
+
         xml_string = (
             '<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">'
             '<xs:include schemaLocation="test.xsd"/><xs:include schemaLocation="test.xsd"/>'
@@ -81,6 +94,8 @@ class TestXSDFlattener(TestCase):
     def test_two_identical_includes_removes_two_includes(
         self, mock_get_dependency_content
     ):
+        """test_two_identical_includes_removes_two_includes"""
+
         xml_string = (
             '<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">'
             '<xs:include schemaLocation="test.xsd"/><xs:include schemaLocation="test.xsd"/>'
@@ -103,6 +118,8 @@ class TestXSDFlattener(TestCase):
     def test_two_identical_includes_replaces_two_includes_by_their_content(
         self, mock_get_dependency_content
     ):
+        """test_two_identical_includes_replaces_two_includes_by_their_content"""
+
         xml_string = (
             '<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">'
             '<xs:include schemaLocation="test1.xsd"/><xs:include schemaLocation="test2.xsd"/>'

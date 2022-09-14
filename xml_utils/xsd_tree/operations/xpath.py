@@ -30,7 +30,7 @@ def get_element_by_xpath(xsd_tree, xpath, namespaces=None):
     except:
         raise XMLError("Unable to find an element for the given Xpath.")
 
-    if element is not None:
-        return element
-    else:
+    if element is None:
         raise XMLError("Unable to find an element for the given Xpath.")
+
+    return element

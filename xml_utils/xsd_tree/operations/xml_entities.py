@@ -3,7 +3,9 @@
 import re
 
 
-class XmlEntities(object):
+class XmlEntities:
+    """Xml Entities"""
+
     def __init__(self):
         """Escape all the predefined xml entities
 
@@ -16,6 +18,14 @@ class XmlEntities(object):
         self.escaped_xml_string = ""
 
     def escape_xml_entities(self, xml_string):
+        """escape_xml_entities
+
+        Args:
+            xml_string:
+
+        Returns:
+
+        """
 
         self.unescaped_xml_string = xml_string
         self.escaped_xml_string = xml_string

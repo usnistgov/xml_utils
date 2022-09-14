@@ -19,9 +19,9 @@ def parse_html(html_text, parent_tag=""):
     Raises:
     """
     try:
-        return XSDTree.fromstring("<%s>%s</%s>" % (parent_tag, html_text, parent_tag))
-    except Exception as e:
-        raise HTMLError(str(e))
+        return XSDTree.fromstring(f"<{parent_tag}>{html_text}</{parent_tag}>")
+    except Exception as exception:
+        raise HTMLError(str(exception))
 
 
 def safe_html(html_text):

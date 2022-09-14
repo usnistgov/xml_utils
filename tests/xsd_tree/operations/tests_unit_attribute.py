@@ -9,18 +9,26 @@ from xml_utils.xsd_tree.operations.attribute import set_attribute, delete_attrib
 
 
 class TestSetAttribute(TestCase):
+    """Test Set Attribute"""
+
     def test_set_attribute_invalid_xsd_raises_xsd_error(self):
+        """test_set_attribute_invalid_xsd_raises_xsd_error"""
+
         xsd_string = "invalid"
         with self.assertRaises(etree.XMLSyntaxError):
             set_attribute(xsd_string, "", "", "")
 
     def test_set_attribute_invalid_xpath_raises_xsd_error(self):
+        """test_set_attribute_invalid_xpath_raises_xsd_error"""
+
         xsd_string = "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><root><test></test></root></xs:schema>"
         xpath = "invalid"
         with self.assertRaises(XMLError):
             set_attribute(xsd_string, xpath, "", "")
 
     def test_set_attribute_adds_attribute(self):
+        """test_set_attribute_adds_attribute"""
+
         xsd_string = "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><root><test></test></root></xs:schema>"
         xpath = "root/test"
         attribute_name = "attr"
@@ -28,6 +36,8 @@ class TestSetAttribute(TestCase):
         self.assertTrue("<test attr=" in updated_xsd_string)
 
     def test_set_attribute_adds_attribute_with_value(self):
+        """test_set_attribute_adds_attribute_with_value"""
+
         xsd_string = "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><root><test></test></root></xs:schema>"
         xpath = "root/test"
         attribute_name = "attr"
@@ -38,6 +48,8 @@ class TestSetAttribute(TestCase):
         self.assertTrue('<test attr="value"' in updated_xsd_string)
 
     def test_set_attribute_if_present(self):
+        """test_set_attribute_if_present"""
+
         xsd_string = (
             "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'>"
             "<root><test attr='old'></test></root></xs:schema>"
@@ -52,18 +64,26 @@ class TestSetAttribute(TestCase):
 
 
 class TestDeleteAttribute(TestCase):
+    """Test Delete Attribute"""
+
     def test_delete_attribute_invalid_xsd_raises_xsd_error(self):
+        """test_delete_attribute_invalid_xsd_raises_xsd_error"""
+
         xsd_string = "invalid"
         with self.assertRaises(etree.XMLSyntaxError):
             delete_attribute(xsd_string, "", "")
 
     def test_delete_attribute_invalid_xpath_raises_xsd_error(self):
+        """test_delete_attribute_invalid_xpath_raises_xsd_error"""
+
         xsd_string = "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><root><test></test></root></xs:schema>"
         xpath = "invalid"
         with self.assertRaises(XMLError):
             delete_attribute(xsd_string, xpath, "")
 
     def test_delete_attribute_removed_if_exists(self):
+        """test_delete_attribute_removed_if_exists"""
+
         xsd_string = (
             "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'>"
             "<root><test attr='value'></test></root></xs:schema>"
@@ -74,6 +94,8 @@ class TestDeleteAttribute(TestCase):
         self.assertTrue("attr=" not in updated_xsd_string)
 
     def test_delete_attribute_does_not_fail_if_not_present(self):
+        """test_delete_attribute_does_not_fail_if_not_present"""
+
         xsd_string = (
             "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'>"
             "<root><test></test></root></xs:schema>"

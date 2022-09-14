@@ -7,7 +7,11 @@ from xml_utils.xsd_tree.xsd_tree import XSDTree
 
 
 class TestRemoveAnnotations(TestCase):
+    """Test Remove Annotations"""
+
     def test_remove_no_annotations_returns_same_value(self):
+        """test_remove_no_annotations_returns_same_value"""
+
         xsd_string = (
             '<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">'
             '<xs:element name="integer" type="xs:integer"/></xs:schema>'
@@ -20,6 +24,8 @@ class TestRemoveAnnotations(TestCase):
         self.assertTrue(xsd_string == result_xsd_string)
 
     def test_remove_annotations_returns_tree_without_annotations(self):
+        """test_remove_annotations_returns_tree_without_annotations"""
+
         xsd_string = (
             '<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">'
             "<xs:annotation><xs:appinfo/></xs:annotation>"

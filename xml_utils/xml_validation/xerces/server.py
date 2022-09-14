@@ -37,19 +37,19 @@ def _xerces_validate_xsd(xsd_string):
         errors
 
     """
-    if _xerces_exists():
-        import xerces_wrapper
-
-        logger.debug("XERCES IMPORTED")
-        error = xerces_wrapper.validate_xsd(xsd_string)
-        logger.debug("SCHEMA validated")
-        if len(error) <= 1:
-            logger.debug("SCHEMA valid")
-            error = None
-
-        return error
-    else:
+    if not _xerces_exists():
         return "Xerces is not installed"
+
+    import xerces_wrapper
+
+    logger.debug("XERCES IMPORTED")
+    error = xerces_wrapper.validate_xsd(xsd_string)
+    logger.debug("SCHEMA validated")
+    if len(error) <= 1:
+        logger.debug("SCHEMA valid")
+        error = None
+
+    return error
 
 
 def _xerces_validate_xml(xsd_string, xml_string):
@@ -63,22 +63,24 @@ def _xerces_validate_xml(xsd_string, xml_string):
         errors
 
     """
-    if _xerces_exists():
-        import xerces_wrapper
-
-        logger.debug("XERCES IMPORTED")
-        error = xerces_wrapper.validate_xml(xsd_string, xml_string)
-        logger.debug("DATA validated")
-        if len(error) <= 1:
-            logger.debug("DATA valid")
-            error = None
-
-        return error
-    else:
+    if not _xerces_exists():
         return "Xerces is not installed"
+
+    import xerces_wrapper
+
+    logger.debug("XERCES IMPORTED")
+    error = xerces_wrapper.validate_xml(xsd_string, xml_string)
+    logger.debug("DATA validated")
+    if len(error) <= 1:
+        logger.debug("DATA valid")
+        error = None
+
+    return error
 
 
 def main(argv):
+    """main"""
+
     parser = argparse.ArgumentParser(description="Launch Server Tool")
 
     # add optional arguments
@@ -162,8 +164,8 @@ def main(argv):
                     socket.send(str(response))
                     mutex = True
                     logger.debug("Sent response")
-                except Exception as e:
-                    logger.error(str(e))
+                except Exception as exception:
+                    logger.error(str(exception))
 
             time.sleep(1)
     except ImportError:

@@ -18,8 +18,8 @@ def validate_xpath(xpath):
     """
     try:
         etree.XPath(xpath.strip())
-    except etree.XPathSyntaxError as e:
-        raise exceptions.XPathError(str(e))
+    except etree.XPathSyntaxError as exception:
+        raise exceptions.XPathError(str(exception))
 
 
 def create_tree_from_xpath(xpath, xml_tree, namespaces=None, default_xpath=""):
@@ -47,7 +47,7 @@ def create_tree_from_xpath(xpath, xml_tree, namespaces=None, default_xpath=""):
     while xpath_element == "":  # Avoid retrieving empty xpath elements
         xpath_element = xpath_elements.pop(0)
 
-    new_xpath = "%s/%s" % (default_xpath, xpath_element)
+    new_xpath = f"{default_xpath}/{xpath_element}"
 
     try:
         assert len(xml_tree.xpath(new_xpath, namespaces=namespaces)) == 1

@@ -8,7 +8,11 @@ from xml_utils.xsd_tree.xsd_tree import XSDTree
 
 
 class TestAdditionalMethods(TestCase):
+    """Test Additional Methods"""
+
     def test_iterparse_method_without_unicode(self):
+        """test_iterparse_method_without_unicode"""
+
         xsd_string = """
             <xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'>
                 <root><test></test></root>
@@ -17,6 +21,8 @@ class TestAdditionalMethods(TestCase):
         XSDTree.iterparse(xsd_string, ("end",))
 
     def test_iterparse_method_with_unicode(self):
+        """test_iterparse_method_with_unicode"""
+
         xsd_string = """
             <xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'>
                 <\u0192-root><test></test></\u0192-root>
@@ -26,6 +32,8 @@ class TestAdditionalMethods(TestCase):
 
     @skip("Exception not raised since py3 migration")
     def test_iterparse_method_without_decoded_symbols(self):
+        """test_iterparse_method_without_decoded_symbols"""
+
         xsd_string = """
             <xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'>
                 <ƒ-root><test></test></ƒ-root>

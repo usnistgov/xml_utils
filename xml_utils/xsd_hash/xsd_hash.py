@@ -41,6 +41,13 @@ def get_hash(xml_string):
 
 
 def hash_dict(xml_dict):
+    """hash_dict
+
+    Args:
+        xml_dict
+
+    Returns:
+    """
     # Order dictionary by key
     xml_dict = OrderedDict(sorted(list(xml_dict.items()), key=lambda i: i[0]))
 
@@ -54,7 +61,7 @@ def hash_dict(xml_dict):
         elif type(xml_dict_val) is list:
             xml_dict[xml_dict_key] = hash_list(xml_dict_val)
         elif not isinstance(xml_dict_val, six.string_types):
-            raise TypeError("%s is not a type that we can hash" % type(xml_dict_val))
+            raise TypeError(f"{type(xml_dict_val)} is not a type that we can hash")
 
     # Extract string via JSON and compute SHA-1
     sorted_xml_string = json.dumps(xml_dict)
@@ -62,6 +69,13 @@ def hash_dict(xml_dict):
 
 
 def hash_list(xml_list):
+    """hash_list
+
+    Args:
+        xml_list
+
+    Returns:
+    """
     xml_list_copy = list()
 
     for xml_list_val in xml_list:
@@ -70,7 +84,7 @@ def hash_list(xml_list):
         elif isinstance(xml_list_val, six.string_types):
             xml_list_copy.append(xml_list_val)
         else:
-            raise TypeError("%s is not a type that we can hash" % type(xml_list_val))
+            raise TypeError(f"{type(xml_list_val)} is not a type that we can hash")
 
     # Sort list items and compute SHA-1
     sorted_xml_list = json.dumps(sorted(xml_list_copy))

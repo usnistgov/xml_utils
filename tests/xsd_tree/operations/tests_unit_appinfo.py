@@ -13,12 +13,18 @@ from xml_utils.xsd_tree.xsd_tree import XSDTree
 
 
 class TestAddAppInfoElement(TestCase):
-    def test_add_appinfo_element_invalid_xsd_raises_xsd_error(self):
+    """Test Add App Info Element"""
+
+    def test_add_app_info_element_invalid_xsd_raises_xsd_error(self):
+        """test_add_app_info_element_invalid_xsd_raises_xsd_error"""
+
         xsd_string = "invalid"
         with self.assertRaises(etree.XMLSyntaxError):
             add_appinfo_element(xsd_string, "", "", "")
 
-    def test_add_appinfo_element_invalid_xpath_raises_xsd_error(self):
+    def test_add_app_info_element_invalid_xpath_raises_xsd_error(self):
+        """test_add_app_info_element_invalid_xpath_raises_xsd_error"""
+
         xsd_string = """
             <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
                 <root><test></test></root>
@@ -28,7 +34,9 @@ class TestAddAppInfoElement(TestCase):
         with self.assertRaises(XMLError):
             add_appinfo_element(xsd_string, xpath, "attribute", "value")
 
-    def test_add_appinfo_element_no_annotation_adds_it(self):
+    def test_add_app_info_element_no_annotation_adds_it(self):
+        """test_add_app_info_element_no_annotation_adds_it"""
+
         xsd_string = """
             <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
                 <xs:element name="root"/>
@@ -58,7 +66,9 @@ class TestAddAppInfoElement(TestCase):
 
         self.assertEqual(updated_xsd_string, expected_string)
 
-    def test_add_appinfo_element_no_appinfo_adds_it(self):
+    def test_add_app_info_element_no_app_info_adds_it(self):
+        """test_add_app_info_element_no_app_info_adds_it"""
+
         xsd_string = """
             <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
                 <xs:element name="root">
@@ -90,7 +100,9 @@ class TestAddAppInfoElement(TestCase):
 
         self.assertEqual(updated_xsd_string, expected_string)
 
-    def test_add_appinfo_element_no_element_adds_it(self):
+    def test_add_app_info_element_no_element_adds_it(self):
+        """test_add_app_info_element_no_element_adds_it"""
+
         xsd_string = """
             <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
             <xs:element name="root"><xs:annotation>
@@ -121,7 +133,9 @@ class TestAddAppInfoElement(TestCase):
 
         self.assertEqual(updated_xsd_string, expected_string)
 
-    def test_add_appinfo_element_annotation_present_updates_it(self):
+    def test_add_app_info_element_annotation_present_updates_it(self):
+        """test_add_app_info_element_annotation_present_updates_it"""
+
         xsd_string = """
             <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
                 <xs:element name="root">
@@ -153,7 +167,9 @@ class TestAddAppInfoElement(TestCase):
 
         self.assertEqual(updated_xsd_string, expected_string)
 
-    def test_add_appinfo_element_appinfo_present_updates_it(self):
+    def test_add_app_info_element_app_info_present_updates_it(self):
+        """test_add_app_info_element_app_info_present_updates_it"""
+
         xsd_string = """
             <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
                 <xs:element name="root">
@@ -185,7 +201,9 @@ class TestAddAppInfoElement(TestCase):
 
         self.assertEqual(updated_xsd_string, expected_string)
 
-    def test_add_appinfo_element_present_updates_it(self):
+    def test_add_app_info_element_present_updates_it(self):
+        """test_add_app_info_element_present_updates_it"""
+
         xsd_string = """
             <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
                 <xs:element name="root">
@@ -217,7 +235,9 @@ class TestAddAppInfoElement(TestCase):
 
         self.assertEqual(updated_xsd_string, expected_string)
 
-    def test_add_appinfo_element_absent_from_two_appinfo(self):
+    def test_add_app_info_element_absent_from_two_app_info(self):
+        """test_add_app_info_element_absent_from_two_appinfo"""
+
         xsd_string = """
             <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
                 <xs:element name="root">
@@ -251,7 +271,9 @@ class TestAddAppInfoElement(TestCase):
 
         self.assertEqual(updated_xsd_string, expected_string)
 
-    def test_add_appinfo_element_present_in_first_of_two_appinfo(self):
+    def test_add_app_info_element_present_in_first_of_two_app_info(self):
+        """test_add_app_info_element_present_in_first_of_two_app_info"""
+
         xsd_string = """
             <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
                 <xs:element name="root">
@@ -285,7 +307,9 @@ class TestAddAppInfoElement(TestCase):
 
         self.assertEqual(updated_xsd_string, expected_string)
 
-    def test_add_appinfo_element_present_in_second_of_two_appinfo(self):
+    def test_add_app_info_element_present_in_second_of_two_app_info(self):
+        """test_add_app_info_element_present_in_second_of_two_app_info"""
+
         xsd_string = """
             <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
                 <xs:element name="root">
@@ -319,7 +343,9 @@ class TestAddAppInfoElement(TestCase):
 
         self.assertEqual(updated_xsd_string, expected_string)
 
-    def test_add_appinfo_element_present_in_two_appinfo_raises_exception(self):
+    def test_add_app_info_element_present_in_two_app_info_raises_exception(self):
+        """test_add_app_info_element_present_in_two_app_info_raises_exception"""
+
         xsd_string = """
             <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
                 <xs:element name="root">
@@ -337,12 +363,18 @@ class TestAddAppInfoElement(TestCase):
 
 
 class TestDeleteAppInfoElement(TestCase):
-    def test_delete_appinfo_element_invalid_xsd_raises_xsd_error(self):
+    """Test Delete App Info Element"""
+
+    def test_delete_app_info_element_invalid_xsd_raises_xsd_error(self):
+        """test_delete_app_info_element_invalid_xsd_raises_xsd_error"""
+
         xsd_string = "invalid"
         with self.assertRaises(etree.XMLSyntaxError):
             delete_appinfo_element(xsd_string, "", "")
 
-    def test_delete_appinfo_element_invalid_xpath_raises_xsd_error(self):
+    def test_delete_app_info_element_invalid_xpath_raises_xsd_error(self):
+        """test_delete_app_info_element_invalid_xpath_raises_xsd_error"""
+
         xsd_string = """
             <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
                 <root><test></test></root>
@@ -352,7 +384,9 @@ class TestDeleteAppInfoElement(TestCase):
         with self.assertRaises(XMLError):
             delete_appinfo_element(xsd_string, xpath, "")
 
-    def test_delete_appinfo_element_removed_if_exists(self):
+    def test_delete_app_info_element_removed_if_exists(self):
+        """test_delete_app_info_element_removed_if_exists"""
+
         xsd_string = """
             <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
                 <xs:element name="root">
@@ -383,6 +417,8 @@ class TestDeleteAppInfoElement(TestCase):
         self.assertEqual(updated_xsd_string, expected_string)
 
     def test_delete_attribute_does_not_fail_if_not_present(self):
+        """test_delete_attribute_does_not_fail_if_not_present"""
+
         xsd_string = """
             <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
                 <xs:element name="root">
@@ -394,7 +430,9 @@ class TestDeleteAppInfoElement(TestCase):
         attribute_name = "attribute"
         delete_appinfo_element(xsd_string, xpath, attribute_name)
 
-    def test_delete_appinfo_element_absent_from_two_appinfo_does_not_fail(self):
+    def test_delete_app_info_element_absent_from_two_appinfo_does_not_fail(self):
+        """test_delete_app_info_element_absent_from_two_appinfo_does_not_fail"""
+
         xsd_string = """
             <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
                 <xs:element name="root">
@@ -409,7 +447,9 @@ class TestDeleteAppInfoElement(TestCase):
 
         delete_appinfo_element(xsd_string, xpath, "attribute")
 
-    def test_delete_appinfo_element_present_in_first_of_two_appinfo(self):
+    def test_delete_app_info_element_present_in_first_of_two_app_info(self):
+        """test_delete_app_info_element_present_in_first_of_two_appinfo"""
+
         xsd_string = """
             <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
                 <xs:element name="root">
@@ -442,7 +482,9 @@ class TestDeleteAppInfoElement(TestCase):
 
         self.assertEqual(updated_xsd_string, expected_string)
 
-    def test_add_appinfo_element_present_in_second_of_two_appinfo(self):
+    def test_add_app_info_element_present_in_second_of_two_app_info(self):
+        """test_add_app_info_element_present_in_second_of_two_app_info"""
+
         xsd_string = """
             <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
                 <xs:element name="root">
@@ -473,7 +515,9 @@ class TestDeleteAppInfoElement(TestCase):
 
         self.assertEqual(updated_xsd_string, expected_string)
 
-    def test_add_appinfo_element_present_in_two_appinfo_raises_exception(self):
+    def test_add_app_info_element_present_in_two_app_info_raises_exception(self):
+        """test_add_app_info_element_present_in_two_app_info_raises_exception"""
+
         xsd_string = """
             <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
                 <xs:element name="root">

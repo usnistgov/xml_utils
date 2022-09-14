@@ -41,7 +41,7 @@ def send_message(
         while retries_left:
             request += 1
 
-            logger.info("Sending request %s..." % request)
+            logger.info("Sending request %s...", request)
             socket.send(message)
 
             expect_reply = True
@@ -52,7 +52,7 @@ def send_message(
                     if not reply:
                         break
                     else:
-                        logger.info("Answer: %s" % reply)
+                        logger.info("Answer: %s", reply)
                         if reply == "ok":
                             reply = None
                         retries_left = 0
