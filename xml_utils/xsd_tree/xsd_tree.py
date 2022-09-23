@@ -58,7 +58,7 @@ class XSDTree:
         """
         try:
             return etree.XSLT(xml_parsed)
-        except:
+        except Exception:
             return etree.XSLT(xml_parsed.encode("utf-8"))
 
     @staticmethod
@@ -76,7 +76,7 @@ class XSDTree:
             parser = etree.XMLParser(remove_blank_text=True)
         try:
             return etree.XML(xml_string, parser=parser)
-        except:
+        except Exception:
             return etree.XML(xml_string.encode("utf-8"), parser=parser)
 
     @staticmethod
@@ -145,7 +145,7 @@ class XSDTree:
             return xml_tree.find(
                 "//xsl:output", namespaces={"xsl": xml_constants.XSL_NAMESPACE}
             ).attrib["method"]
-        except:
+        except Exception:
             # return default output format
             method = "xml"
             children = xml_tree.getroot().getchildren()

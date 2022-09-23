@@ -27,7 +27,7 @@ def get_element_by_xpath(xsd_tree, xpath, namespaces=None):
 
     try:
         element = xsd_tree.find(xpath)
-    except:
+    except Exception:
         raise XMLError("Unable to find an element for the given Xpath.")
 
     if element is None:

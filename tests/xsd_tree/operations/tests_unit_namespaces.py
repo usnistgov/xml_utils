@@ -38,7 +38,7 @@ class TestGetNamespaces(TestCase):
 
         xsd_string = """
             <xs:schema
-                xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+                xmlns:xs="http://www.w3.org/2001/XMLSchema"
                 xmlns:test="test">
             </xs:schema>
         """

@@ -62,7 +62,7 @@ class XSDFlattener(metaclass=ABCMeta):
             # replace the includes by their content
             return self._replace_all_includes_by_content(xml_tree)
 
-        except:
+        except Exception:
             return None
 
     def _replace_all_includes_by_content(self, xml_tree):
