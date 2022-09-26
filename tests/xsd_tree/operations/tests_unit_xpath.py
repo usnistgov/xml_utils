@@ -33,7 +33,9 @@ class TestGetElementByXpath(TestCase):
         element = get_element_by_xpath(xsd_tree, xpath, namespaces)
         self.assertTrue(element is not None)
 
-    def test_get_element_xpath_matching_element_with_xsd_namespace_prefix(self):
+    def test_get_element_xpath_matching_element_with_xsd_namespace_prefix(
+        self,
+    ):
         """test_get_element_xpath_matching_element_with_xsd_namespace_prefix"""
 
         xsd_string = (
@@ -60,7 +62,9 @@ class TestGetElementByXpath(TestCase):
         with self.assertRaises(XMLError):
             get_element_by_xpath(xsd_tree, xpath, namespaces)
 
-    def test_get_element_xpath_not_matching_element_without_namespace_prefix(self):
+    def test_get_element_xpath_not_matching_element_without_namespace_prefix(
+        self,
+    ):
         """test_get_element_xpath_not_matching_element_without_namespace_prefix"""
 
         xsd_string = (

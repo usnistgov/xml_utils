@@ -79,7 +79,9 @@ class TestSimpleXSD(TestCase):
 
         # Make sure that an XSD with different comments produces the same hash
         with open(
-            join(RESOURCES_PATH, "chemical-element-annot-01.xsd"), "r", encoding="utf-8"
+            join(RESOURCES_PATH, "chemical-element-annot-01.xsd"),
+            "r",
+            encoding="utf-8",
         ) as xsd_file:
             content = xsd_file.read()
             content_hash = xsd_hash.get_hash(content)
@@ -90,7 +92,9 @@ class TestSimpleXSD(TestCase):
 
         # Make sure that an XSD with different comments produces the same hash
         with open(
-            join(RESOURCES_PATH, "chemical-element-annot-02.xsd"), "r", encoding="utf-8"
+            join(RESOURCES_PATH, "chemical-element-annot-02.xsd"),
+            "r",
+            encoding="utf-8",
         ) as xsd_file:
             content = xsd_file.read()
             content_hash = xsd_hash.get_hash(content)
@@ -115,7 +119,9 @@ class TestSimpleXSD(TestCase):
         # Make sure that an XSD with different enumeration does not produce
         # the same hash
         with open(
-            join(RESOURCES_PATH, "chemical-element-enum.xsd"), "r", encoding="utf-8"
+            join(RESOURCES_PATH, "chemical-element-enum.xsd"),
+            "r",
+            encoding="utf-8",
         ) as xsd_file:
             content = xsd_file.read()
             content_hash = xsd_hash.get_hash(content)
@@ -151,7 +157,9 @@ class TestCommonXSD(TestCase):
         # Make sure that an XSD with elements in a different order produces
         # the same hash
         with open(
-            join(RESOURCES_PATH, "composition-mixed.xsd"), "r", encoding="utf-8"
+            join(RESOURCES_PATH, "composition-mixed.xsd"),
+            "r",
+            encoding="utf-8",
         ) as xsd_file:
             content = xsd_file.read()
             content_hash = xsd_hash.get_hash(content)
@@ -163,7 +171,9 @@ class TestCommonXSD(TestCase):
         # Make sure that an XSD with different root names does not produce
         # the same hash
         with open(
-            join(RESOURCES_PATH, "composition-root-name.xsd"), "r", encoding="utf-8"
+            join(RESOURCES_PATH, "composition-root-name.xsd"),
+            "r",
+            encoding="utf-8",
         ) as xsd_file:
             content = xsd_file.read()
             content_hash = xsd_hash.get_hash(content)
@@ -175,7 +185,9 @@ class TestCommonXSD(TestCase):
         # Make sure that an XSD with different type names does not produce
         # the same hash
         with open(
-            join(RESOURCES_PATH, "composition-type-name.xsd"), "r", encoding="utf-8"
+            join(RESOURCES_PATH, "composition-type-name.xsd"),
+            "r",
+            encoding="utf-8",
         ) as xsd_file:
             content = xsd_file.read()
             content_hash = xsd_hash.get_hash(content)

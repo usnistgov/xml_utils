@@ -24,7 +24,9 @@ class TestXSDFlattener(TestCase):
     @patch(
         "xml_utils.xsd_flattener.xsd_flattener_url.XSDFlattenerURL.get_dependency_content"
     )
-    def test_one_include_returns_flat_content(self, mock_get_dependency_content):
+    def test_one_include_returns_flat_content(
+        self, mock_get_dependency_content
+    ):
         """test_one_include_returns_flat_content"""
 
         xml_string = (
@@ -61,7 +63,9 @@ class TestXSDFlattener(TestCase):
         flattener = XSDFlattenerURL(xml_string)
         mock_get_dependency_content.return_value = dependency
         flat_string = flattener.get_flat()
-        self.assertTrue('<xs:include schemaLocation="test.xsd"/>' not in flat_string)
+        self.assertTrue(
+            '<xs:include schemaLocation="test.xsd"/>' not in flat_string
+        )
 
     @patch(
         "xml_utils.xsd_flattener.xsd_flattener_url.XSDFlattenerURL.get_dependency_content"
@@ -109,7 +113,9 @@ class TestXSDFlattener(TestCase):
         flattener = XSDFlattenerURL(xml_string)
         mock_get_dependency_content.return_value = dependency
         flat_string = flattener.get_flat()
-        self.assertTrue('<xs:include schemaLocation="test.xsd"/>' not in flat_string)
+        self.assertTrue(
+            '<xs:include schemaLocation="test.xsd"/>' not in flat_string
+        )
 
     @patch(
         "xml_utils.xsd_flattener.xsd_flattener_url.XSDFlattenerURL.get_dependency_content"

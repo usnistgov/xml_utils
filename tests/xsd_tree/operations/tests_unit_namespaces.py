@@ -27,9 +27,7 @@ class TestGetNamespaces(TestCase):
     def test_get_namespaces_one_namespace_namespace_is_value(self):
         """test_get_namespaces_one_namespace_namespace_is_value"""
 
-        xsd_string = (
-            "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'></xs:schema>"
-        )
+        xsd_string = "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'></xs:schema>"
         namespaces = get_namespaces(xsd_string)
         self.assertTrue(namespaces["xs"] == "http://www.w3.org/2001/XMLSchema")
 
@@ -44,7 +42,8 @@ class TestGetNamespaces(TestCase):
         """
         namespaces = get_namespaces(xsd_string)
         self.assertTrue(
-            "xs" in list(namespaces.keys()) and "test" in list(namespaces.keys())
+            "xs" in list(namespaces.keys())
+            and "test" in list(namespaces.keys())
         )
 
     def test_get_namespaces_invalid_file(self):
@@ -57,9 +56,7 @@ class TestGetNamespaces(TestCase):
     def test_get_namespaces_xml_namespace(self):
         """test_get_namespaces_xml_namespace"""
 
-        xsd_string = (
-            "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'></xs:schema>"
-        )
+        xsd_string = "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'></xs:schema>"
         namespaces = get_namespaces(xsd_string)
         self.assertTrue("xml" in list(namespaces.keys()))
 
@@ -70,9 +67,7 @@ class TestGetDefaultPrefix(TestCase):
     def test_get_xs_prefix(self):
         """test_get_xs_prefix"""
 
-        xsd_string = (
-            "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'></xs:schema>"
-        )
+        xsd_string = "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'></xs:schema>"
         namespaces = get_namespaces(xsd_string)
         prefix = get_default_prefix(namespaces)
         self.assertTrue(prefix == "xs")
@@ -80,9 +75,7 @@ class TestGetDefaultPrefix(TestCase):
     def test_get_xsd_prefix(self):
         """test_get_xsd_prefix"""
 
-        xsd_string = (
-            "<xsd:schema xmlns:xsd='http://www.w3.org/2001/XMLSchema'></xsd:schema>"
-        )
+        xsd_string = "<xsd:schema xmlns:xsd='http://www.w3.org/2001/XMLSchema'></xsd:schema>"
         namespaces = get_namespaces(xsd_string)
         prefix = get_default_prefix(namespaces)
         self.assertTrue(prefix == "xsd")
@@ -105,7 +98,9 @@ class TestGetTargetNamespace(TestCase):
         xsd_string = "<schema></schema>"
         xsd_tree = XSDTree.build_tree(xsd_string)
         namespaces = get_namespaces(xsd_string)
-        self.assertEqual((None, ""), get_target_namespace(xsd_tree, namespaces))
+        self.assertEqual(
+            (None, ""), get_target_namespace(xsd_tree, namespaces)
+        )
 
     def test_target_namespace_no_prefix_returns_target_namespace_only(self):
         """test_target_namespace_no_prefix_returns_target_namespace_only"""
@@ -113,14 +108,16 @@ class TestGetTargetNamespace(TestCase):
         xsd_string = "<schema targetNamespace='namespace'></schema>"
         xsd_tree = XSDTree.build_tree(xsd_string)
         namespaces = get_namespaces(xsd_string)
-        self.assertEqual(("namespace", ""), get_target_namespace(xsd_tree, namespaces))
+        self.assertEqual(
+            ("namespace", ""), get_target_namespace(xsd_tree, namespaces)
+        )
 
-    def test_target_namespace_with_prefix_returns_target_namespace_and_prefix(self):
+    def test_target_namespace_with_prefix_returns_target_namespace_and_prefix(
+        self,
+    ):
         """test_target_namespace_with_prefix_returns_target_namespace_and_prefix"""
 
-        xsd_string = (
-            "<schema targetNamespace='namespace' xmlns:ns='namespace'></schema>"
-        )
+        xsd_string = "<schema targetNamespace='namespace' xmlns:ns='namespace'></schema>"
         xsd_tree = XSDTree.build_tree(xsd_string)
         namespaces = get_namespaces(xsd_string)
         self.assertEqual(

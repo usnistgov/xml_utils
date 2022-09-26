@@ -215,7 +215,9 @@ class TestAddAppInfoElement(TestCase):
         """
         xpath = "xs:element"
 
-        updated_xsd_string = add_appinfo_element(xsd_string, xpath, "attribute", "new")
+        updated_xsd_string = add_appinfo_element(
+            xsd_string, xpath, "attribute", "new"
+        )
 
         expected_string = """
             <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
@@ -250,7 +252,9 @@ class TestAddAppInfoElement(TestCase):
         """
 
         xpath = "xs:element"
-        updated_xsd_string = add_appinfo_element(xsd_string, xpath, "attribute", "new")
+        updated_xsd_string = add_appinfo_element(
+            xsd_string, xpath, "attribute", "new"
+        )
 
         expected_string = """
             <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
@@ -286,7 +290,9 @@ class TestAddAppInfoElement(TestCase):
         """
         xpath = "xs:element"
 
-        updated_xsd_string = add_appinfo_element(xsd_string, xpath, "attribute", "new")
+        updated_xsd_string = add_appinfo_element(
+            xsd_string, xpath, "attribute", "new"
+        )
 
         expected_string = """
             <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
@@ -322,7 +328,9 @@ class TestAddAppInfoElement(TestCase):
         """
         xpath = "xs:element"
 
-        updated_xsd_string = add_appinfo_element(xsd_string, xpath, "attribute", "new")
+        updated_xsd_string = add_appinfo_element(
+            xsd_string, xpath, "attribute", "new"
+        )
 
         expected_string = """
             <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
@@ -343,7 +351,9 @@ class TestAddAppInfoElement(TestCase):
 
         self.assertEqual(updated_xsd_string, expected_string)
 
-    def test_add_app_info_element_present_in_two_app_info_raises_exception(self):
+    def test_add_app_info_element_present_in_two_app_info_raises_exception(
+        self,
+    ):
         """test_add_app_info_element_present_in_two_app_info_raises_exception"""
 
         xsd_string = """
@@ -398,7 +408,9 @@ class TestDeleteAppInfoElement(TestCase):
         """
         xpath = "xs:element"
         attribute_name = "attribute"
-        updated_xsd_string = delete_appinfo_element(xsd_string, xpath, attribute_name)
+        updated_xsd_string = delete_appinfo_element(
+            xsd_string, xpath, attribute_name
+        )
 
         expected_string = """
             <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
@@ -430,7 +442,9 @@ class TestDeleteAppInfoElement(TestCase):
         attribute_name = "attribute"
         delete_appinfo_element(xsd_string, xpath, attribute_name)
 
-    def test_delete_app_info_element_absent_from_two_appinfo_does_not_fail(self):
+    def test_delete_app_info_element_absent_from_two_appinfo_does_not_fail(
+        self,
+    ):
         """test_delete_app_info_element_absent_from_two_appinfo_does_not_fail"""
 
         xsd_string = """
@@ -462,7 +476,9 @@ class TestDeleteAppInfoElement(TestCase):
         """
         xpath = "xs:element"
 
-        updated_xsd_string = delete_appinfo_element(xsd_string, xpath, "attribute")
+        updated_xsd_string = delete_appinfo_element(
+            xsd_string, xpath, "attribute"
+        )
 
         expected_string = """
             <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
@@ -497,7 +513,9 @@ class TestDeleteAppInfoElement(TestCase):
         """
         xpath = "xs:element"
 
-        updated_xsd_string = delete_appinfo_element(xsd_string, xpath, "attribute")
+        updated_xsd_string = delete_appinfo_element(
+            xsd_string, xpath, "attribute"
+        )
 
         expected_string = """
             <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
@@ -515,7 +533,9 @@ class TestDeleteAppInfoElement(TestCase):
 
         self.assertEqual(updated_xsd_string, expected_string)
 
-    def test_add_app_info_element_present_in_two_app_info_raises_exception(self):
+    def test_add_app_info_element_present_in_two_app_info_raises_exception(
+        self,
+    ):
         """test_add_app_info_element_present_in_two_app_info_raises_exception"""
 
         xsd_string = """

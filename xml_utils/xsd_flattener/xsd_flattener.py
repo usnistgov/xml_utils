@@ -75,7 +75,9 @@ class XSDFlattener(metaclass=ABCMeta):
 
         """
         # get the includes
-        includes = xml_tree.findall(f"{constants.LXML_SCHEMA_NAMESPACE}include")
+        includes = xml_tree.findall(
+            f"{constants.LXML_SCHEMA_NAMESPACE}include"
+        )
         # check if it has includes
         if len(includes) > 0:
             # browse includes
@@ -91,7 +93,9 @@ class XSDFlattener(metaclass=ABCMeta):
         return XSDTree.tostring(xml_tree)
 
     @staticmethod
-    def _replace_include_by_content(xml_tree, include_element, dependency_content):
+    def _replace_include_by_content(
+        xml_tree, include_element, dependency_content
+    ):
         """Replace an include by its content
 
         Args:

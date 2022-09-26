@@ -28,7 +28,9 @@ def get_hash(xml_string):
     xml_tree = XSDTree.build_tree(xml_string, parser=hash_parser)
 
     # Remove all annotations
-    annotations = xml_tree.findall(".//{http://www.w3.org/2001/XMLSchema}annotation")
+    annotations = xml_tree.findall(
+        ".//{http://www.w3.org/2001/XMLSchema}annotation"
+    )
     for annotation in annotations:
         annotation.getparent().remove(annotation)
     clean_xml_string = XSDTree.tostring(xml_tree)
@@ -60,7 +62,9 @@ def hash_dict(xml_dict):
         elif type(xml_dict_val) is list:
             xml_dict[xml_dict_key] = hash_list(xml_dict_val)
         elif not isinstance(xml_dict_val, str):
-            raise TypeError(f"{type(xml_dict_val)} is not a type that we can hash")
+            raise TypeError(
+                f"{type(xml_dict_val)} is not a type that we can hash"
+            )
 
     # Extract string via JSON and compute SHA-1
     sorted_xml_string = json.dumps(xml_dict)
@@ -83,7 +87,9 @@ def hash_list(xml_list):
         elif isinstance(xml_list_val, str):
             xml_list_copy.append(xml_list_val)
         else:
-            raise TypeError(f"{type(xml_list_val)} is not a type that we can hash")
+            raise TypeError(
+                f"{type(xml_list_val)} is not a type that we can hash"
+            )
 
     # Sort list items and compute SHA-1
     sorted_xml_list = json.dumps(sorted(xml_list_copy))

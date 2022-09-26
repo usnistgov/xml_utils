@@ -5,7 +5,10 @@ from unittest import TestCase
 from lxml import etree
 
 from xml_utils.commons.exceptions import XMLError
-from xml_utils.xsd_tree.operations.attribute import set_attribute, delete_attribute
+from xml_utils.xsd_tree.operations.attribute import (
+    set_attribute,
+    delete_attribute,
+)
 
 
 class TestSetAttribute(TestCase):
@@ -32,7 +35,9 @@ class TestSetAttribute(TestCase):
         xsd_string = "<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'><root><test></test></root></xs:schema>"
         xpath = "root/test"
         attribute_name = "attr"
-        updated_xsd_string = set_attribute(xsd_string, xpath, attribute_name, "")
+        updated_xsd_string = set_attribute(
+            xsd_string, xpath, attribute_name, ""
+        )
         self.assertTrue("<test attr=" in updated_xsd_string)
 
     def test_set_attribute_adds_attribute_with_value(self):
@@ -90,7 +95,9 @@ class TestDeleteAttribute(TestCase):
         )
         xpath = "root/test"
         attribute_name = "attr"
-        updated_xsd_string = delete_attribute(xsd_string, xpath, attribute_name)
+        updated_xsd_string = delete_attribute(
+            xsd_string, xpath, attribute_name
+        )
         self.assertTrue("attr=" not in updated_xsd_string)
 
     def test_delete_attribute_does_not_fail_if_not_present(self):

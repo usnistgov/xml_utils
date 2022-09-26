@@ -42,7 +42,9 @@ class XSDTree:
 
         """
         try:
-            return etree.tostring(xml_tree, pretty_print=pretty, encoding="unicode")
+            return etree.tostring(
+                xml_tree, pretty_print=pretty, encoding="unicode"
+            )
         except Exception as exception:
             raise exceptions.XMLError(str(exception))
 

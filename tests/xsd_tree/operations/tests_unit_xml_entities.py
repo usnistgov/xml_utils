@@ -65,7 +65,9 @@ class TestEscapeXmlEntities(TestCase):
 
         string = "<&lt;&quot;>&&&lt;"
 
-        self.assertTrue(XmlEntities.unescape_xml_entities(string)[0] == '<<">&&<')
+        self.assertTrue(
+            XmlEntities.unescape_xml_entities(string)[0] == '<<">&&<'
+        )
         self.assertTrue(XmlEntities.unescape_xml_entities(string)[1] == 3)
 
     def test_unescaped_without_predefined_xml_entities(self):
@@ -84,6 +86,7 @@ class TestEscapeXmlEntities(TestCase):
         string = "&lt;&lt;&lt;&quot;&quot;&apos;&apos;&apos;&apos;&apos;&apos;&apos;&quot;&quot;&quot;&gt;&gt;&gt;"
 
         self.assertTrue(
-            XmlEntities.unescape_xml_entities(string)[0] == "<<<\"\"'''''''\"\"\">>>"
+            XmlEntities.unescape_xml_entities(string)[0]
+            == "<<<\"\"'''''''\"\"\">>>"
         )
         self.assertTrue(XmlEntities.unescape_xml_entities(string)[1] == 18)

@@ -6,7 +6,11 @@ logger = logging.getLogger(__name__)
 
 
 def send_message(
-    message, endpoint="tcp://127.0.0.1:5555", timeout=3000, retries=3, context_zmq=7
+    message,
+    endpoint="tcp://127.0.0.1:5555",
+    timeout=3000,
+    retries=3,
+    context_zmq=7,
 ):
     """Send a message to the Schema validation server
 
