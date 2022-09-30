@@ -4,7 +4,6 @@ import hashlib
 import json
 from collections import OrderedDict
 
-import six
 import xmltodict
 from lxml import etree
 
@@ -60,7 +59,7 @@ def hash_dict(xml_dict):
             xml_dict[xml_dict_key] = hash_dict(xml_dict_val)
         elif type(xml_dict_val) is list:
             xml_dict[xml_dict_key] = hash_list(xml_dict_val)
-        elif not isinstance(xml_dict_val, six.string_types):
+        elif not isinstance(xml_dict_val, str):
             raise TypeError(f"{type(xml_dict_val)} is not a type that we can hash")
 
     # Extract string via JSON and compute SHA-1
@@ -81,7 +80,7 @@ def hash_list(xml_list):
     for xml_list_val in xml_list:
         if type(xml_list_val) is dict:
             xml_list_copy.append(hash_dict(xml_list_val))
-        elif isinstance(xml_list_val, six.string_types):
+        elif isinstance(xml_list_val, str):
             xml_list_copy.append(xml_list_val)
         else:
             raise TypeError(f"{type(xml_list_val)} is not a type that we can hash")

@@ -3,8 +3,7 @@
 
 from os.path import join, dirname
 from unittest import TestCase
-
-from mock.mock import patch
+from unittest.mock import patch
 
 from xml_utils.xsd_flattener.xsd_flattener_url import XSDFlattenerURL
 

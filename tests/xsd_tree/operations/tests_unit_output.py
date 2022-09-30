@@ -1,8 +1,7 @@
 """ Unit tests for output method
 """
-from unittest import TestCase
-
 import logging
+from unittest import TestCase
 
 from xml_utils.xsd_tree.xsd_tree import XSDTree
 

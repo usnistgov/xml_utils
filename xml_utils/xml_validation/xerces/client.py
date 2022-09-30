@@ -1,7 +1,5 @@
 """ Client library for Xerces validator.
 """
-from __future__ import print_function
-
 import logging
 
 logger = logging.getLogger(__name__)
