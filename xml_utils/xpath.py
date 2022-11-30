@@ -1,5 +1,6 @@
 """ XPath related functions
 """
+import re
 from copy import deepcopy
 
 from lxml import etree
@@ -17,7 +18,15 @@ def validate_xpath(xpath):
         xml_utils.commons.exceptions.XPathError
     """
     try:
-        etree.XPath(xpath.strip())
+        xpath = xpath.strip()
+
+        # Etree parser sometimes consider XPath valid when they are not (e.g. $myxpath).
+        # This check pre-validate the xpath before sending it to the etree parser.
+        xpath_regexp = r"^[a-zA-Z_\/][a-zA-Z0-9_\-\.\:\/\@]+[a-zA-Z0-9_\-\.]$"
+        if re.match(xpath_regexp, xpath) is None:
+            raise etree.XPathSyntaxError("Invalid expression")
+
+        etree.XPath(xpath)
     except etree.XPathSyntaxError as exception:
         raise exceptions.XPathError(str(exception))
 
