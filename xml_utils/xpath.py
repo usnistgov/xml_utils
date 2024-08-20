@@ -1,5 +1,6 @@
 """ XPath related functions
 """
+
 import re
 from copy import deepcopy
 

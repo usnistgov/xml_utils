@@ -1,5 +1,6 @@
 """Predefined xml entities operations
 """
+
 import re
 
 

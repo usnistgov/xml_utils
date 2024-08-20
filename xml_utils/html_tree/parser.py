@@ -1,5 +1,6 @@
 """ Package parsing HTML
 """
+
 from lxml import html
 from lxml.html.diff import htmldiff
 

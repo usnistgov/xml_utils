@@ -1,5 +1,6 @@
 """ Unit tests for appinfo operations
 """
+
 from unittest import TestCase
 
 from lxml import etree

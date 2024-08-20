@@ -1,5 +1,6 @@
 """ XSD tree operation, build, parse
 """
+
 from io import BytesIO
 
 from lxml import etree

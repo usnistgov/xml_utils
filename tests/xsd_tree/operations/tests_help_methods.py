@@ -1,5 +1,6 @@
 """ Unit tests for additional methods
 """
+
 from unittest import TestCase
 from unittest import skip
 

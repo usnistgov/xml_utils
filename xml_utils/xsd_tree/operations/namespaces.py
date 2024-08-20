@@ -1,5 +1,6 @@
 """XSD Tree operations on namespaces
 """
+
 from xml_utils.commons import constants as xml_utils_constants
 from xml_utils.xsd_tree.xsd_tree import XSDTree
 

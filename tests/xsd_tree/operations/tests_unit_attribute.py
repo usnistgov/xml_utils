@@ -1,5 +1,6 @@
 """Unit tests for attributes operations
 """
+
 from unittest import TestCase
 
 from lxml import etree

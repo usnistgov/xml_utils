@@ -1,5 +1,6 @@
 """ XSD Flattener abstract class
 """
+
 from abc import ABCMeta, abstractmethod
 
 import lxml.etree as etree

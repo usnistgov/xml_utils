@@ -1,5 +1,6 @@
 """Unit tests for annotation operations
 """
+
 from unittest import TestCase
 
 from xml_utils.xsd_tree.operations.annotation import remove_annotations

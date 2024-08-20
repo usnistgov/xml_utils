@@ -1,5 +1,6 @@
 """Unit tests for xpath operations
 """
+
 from unittest import TestCase
 
 from xml_utils.commons.exceptions import XMLError

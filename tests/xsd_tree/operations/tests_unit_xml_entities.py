@@ -1,5 +1,6 @@
 """Unit tests for XmlEntities operation
 """
+
 from unittest import TestCase
 
 from xml_utils.xsd_tree.operations.xml_entities import XmlEntities

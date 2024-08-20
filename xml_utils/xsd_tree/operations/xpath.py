@@ -1,5 +1,6 @@
 """XSD Tree operations on xpath
 """
+
 from xml_utils.commons import constants as xml_utils_constants
 from xml_utils.commons.exceptions import XMLError
 from xml_utils.xsd_tree.operations.namespaces import get_default_prefix

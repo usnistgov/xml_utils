@@ -1,5 +1,6 @@
 """ Server code for Xerces validator.
 """
+
 import argparse
 import json
 import logging

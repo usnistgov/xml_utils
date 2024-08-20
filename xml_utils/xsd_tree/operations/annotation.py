@@ -1,5 +1,6 @@
 """XSD Tree operations on annotations
 """
+
 from xml_utils.commons import constants as xml_utils_constants
 
 

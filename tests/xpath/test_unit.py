@@ -1,5 +1,6 @@
 """ Unit test for xpath module
 """
+
 from unittest import TestCase
 
 from xml_utils.commons.exceptions import XPathError

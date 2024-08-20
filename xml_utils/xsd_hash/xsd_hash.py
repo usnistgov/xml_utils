@@ -1,5 +1,6 @@
 """ Package computing the hash a XML string.
 """
+
 import hashlib
 import json
 from collections import OrderedDict
