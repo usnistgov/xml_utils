@@ -1,5 +1,4 @@
-""" Client library for Xerces validator.
-"""
+"""Client library for Xerces validator."""
 
 import logging
 

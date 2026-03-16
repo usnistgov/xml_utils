@@ -1,5 +1,4 @@
-""" Server code for Xerces validator.
-"""
+"""Server code for Xerces validator."""
 
 import argparse
 import json

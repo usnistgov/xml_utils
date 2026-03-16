@@ -1,5 +1,4 @@
-""" Default URI Resolver
-"""
+"""Default URI Resolver"""
 
 from lxml import etree
 

@@ -1,5 +1,4 @@
-"""XSD Flattener URL class
-"""
+"""XSD Flattener URL class"""
 
 import urllib.error
 import urllib.parse

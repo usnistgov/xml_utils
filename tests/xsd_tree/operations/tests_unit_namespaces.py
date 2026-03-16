@@ -1,5 +1,4 @@
-""" Unit tests for namespaces operations
-"""
+"""Unit tests for namespaces operations"""
 
 from unittest import TestCase
 

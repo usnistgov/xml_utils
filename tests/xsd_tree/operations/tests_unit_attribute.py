@@ -1,5 +1,4 @@
-"""Unit tests for attributes operations
-"""
+"""Unit tests for attributes operations"""
 
 from unittest import TestCase
 

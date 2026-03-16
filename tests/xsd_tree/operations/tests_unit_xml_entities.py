@@ -1,5 +1,4 @@
-"""Unit tests for XmlEntities operation
-"""
+"""Unit tests for XmlEntities operation"""
 
 from unittest import TestCase
 

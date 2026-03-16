@@ -1,5 +1,4 @@
-""" Xml Utils Exceptions
-"""
+"""Xml Utils Exceptions"""
 
 
 class XMLError(Exception):

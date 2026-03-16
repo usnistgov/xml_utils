@@ -1,5 +1,4 @@
-""" XSD Flattener abstract class
-"""
+"""XSD Flattener abstract class"""
 
 from abc import ABCMeta, abstractmethod
 

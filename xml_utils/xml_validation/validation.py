@@ -1,5 +1,5 @@
 """
-    Api for XSD and XML validation using xerces server or lxml library
+Api for XSD and XML validation using xerces server or lxml library
 """
 
 import json

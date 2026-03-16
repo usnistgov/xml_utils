@@ -1,5 +1,4 @@
-""" Unit tests for XSD hash function
-"""
+"""Unit tests for XSD hash function"""
 
 from os.path import join, dirname, abspath
 from unittest import TestCase

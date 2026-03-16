@@ -1,5 +1,4 @@
-""" XPath related functions
-"""
+"""XPath related functions"""
 
 import re
 from copy import deepcopy

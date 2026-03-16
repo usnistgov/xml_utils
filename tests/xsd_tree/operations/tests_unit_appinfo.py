@@ -1,5 +1,4 @@
-""" Unit tests for appinfo operations
-"""
+"""Unit tests for appinfo operations"""
 
 from unittest import TestCase
 

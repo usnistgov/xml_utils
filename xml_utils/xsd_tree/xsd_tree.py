@@ -1,5 +1,4 @@
-""" XSD tree operation, build, parse
-"""
+"""XSD tree operation, build, parse"""
 
 from io import BytesIO
 

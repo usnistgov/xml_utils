@@ -1,5 +1,4 @@
-"""XSD Tree operations on appinfo
-"""
+"""XSD Tree operations on appinfo"""
 
 from lxml import etree
 

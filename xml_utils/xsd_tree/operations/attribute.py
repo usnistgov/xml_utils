@@ -1,5 +1,4 @@
-"""XSD Tree operations on attributes
-"""
+"""XSD Tree operations on attributes"""
 
 from xml_utils.xsd_tree.operations.namespaces import get_namespaces
 from xml_utils.xsd_tree.operations.xpath import get_element_by_xpath

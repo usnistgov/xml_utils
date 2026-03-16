@@ -1,5 +1,4 @@
-"""Unit tests for xpath operations
-"""
+"""Unit tests for xpath operations"""
 
 from unittest import TestCase
 

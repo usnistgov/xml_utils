@@ -1,5 +1,4 @@
-"""XSD types utils
-"""
+"""XSD types utils"""
 
 
 def get_xsd_types(namespace_prefix=""):

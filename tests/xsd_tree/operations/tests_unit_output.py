@@ -1,5 +1,4 @@
-""" Unit tests for output method
-"""
+"""Unit tests for output method"""
 
 import logging
 from unittest import TestCase
