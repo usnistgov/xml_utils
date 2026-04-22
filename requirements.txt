@@ -1,2 +1,2 @@
-lxml==6.0.*
+lxml==6.1.*
 xmltodict==1.0.*
